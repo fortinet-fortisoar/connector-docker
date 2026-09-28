@@ -1,0 +1,4458 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - Docker - 1.0.0",
+      "description": "Sample playbooks for \"Docker\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
+      "visible": true,
+      "image": null,
+      "uuid": "5b7203c9-38e6-413f-a080-b40338673ec7",
+      "id": 293,
+      "deletedAt": null,
+      "importedBy": [],
+      "recordTags": [
+        "docker",
+        "Docker"
+      ],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Inspect Volume",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Inspect a volume",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/c76312c1-b3e7-402c-aef7-9864c6c7c888",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Inspect Volume",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "name": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "inspect_volume",
+                "operationTitle": "Inspect Volume"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "2c3ffcd9-a3e0-44ae-9890-97bd63e3debd"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "c76312c1-b3e7-402c-aef7-9864c6c7c888"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Inspect Volume",
+              "targetStep": "/api/3/workflow_steps/2c3ffcd9-a3e0-44ae-9890-97bd63e3debd",
+              "sourceStep": "/api/3/workflow_steps/c76312c1-b3e7-402c-aef7-9864c6c7c888",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "fc926540-00eb-475e-871b-277198a75c6e"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "017716a4-df17-4253-a27d-320778e3d58e",
+          "id": 4616,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Unpause Container",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Resumes all processes in a paused Docker container.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/b0962561-e659-437f-890d-aa33b01ad092",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "b0962561-e659-437f-890d-aa33b01ad092"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Unpause Container",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "id": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "unpause_container",
+                "operationTitle": "Unpause Container"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "43526b51-c5f2-46c9-8bf2-d29bcc1f6904"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Unpause Container",
+              "targetStep": "/api/3/workflow_steps/43526b51-c5f2-46c9-8bf2-d29bcc1f6904",
+              "sourceStep": "/api/3/workflow_steps/b0962561-e659-437f-890d-aa33b01ad092",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "24657f5d-2472-4ebc-be7b-a390fee5264c"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "122b2a81-19e4-4e7f-9b9c-ebebf09d9f35",
+          "id": 4590,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Create Network",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Creates a Docker network with the specified driver, scope, connectivity, and IP configuration.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/6fc503fb-c73a-4563-8791-2b2b9006af40",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Network",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "Name": "",
+                  "Scope": "",
+                  "Driver": "bridge",
+                  "Ingress": "",
+                  "Internal": "",
+                  "Attachable": "",
+                  "EnableIPv4": true,
+                  "EnableIPv6": "",
+                  "additional_fields": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "create_network",
+                "operationTitle": "Create Network"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "0c759ae7-3dab-4e16-917d-066a9abec1d3"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "6fc503fb-c73a-4563-8791-2b2b9006af40"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Create Network",
+              "targetStep": "/api/3/workflow_steps/0c759ae7-3dab-4e16-917d-066a9abec1d3",
+              "sourceStep": "/api/3/workflow_steps/6fc503fb-c73a-4563-8791-2b2b9006af40",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "4e7bffaa-f65b-4a42-a121-d8de390c07c7"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "153ace38-c71b-45e9-96fb-3813237e03c3",
+          "id": 4607,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "List Images",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Retrieves a list of Docker images available on the Docker host, including image IDs, tags, sizes, labels, digests, and other summary information.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/10569d96-dd7c-4550-8664-6bd4194bd709",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "List Images",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "all": "",
+                  "digests": "",
+                  "filters": "",
+                  "identity": "",
+                  "manifests": "",
+                  "shared_size": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "list_images",
+                "operationTitle": "List Images"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "4aadb899-1974-4238-a5d5-acee26fa8f59"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "10569d96-dd7c-4550-8664-6bd4194bd709"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> List Images",
+              "targetStep": "/api/3/workflow_steps/4aadb899-1974-4238-a5d5-acee26fa8f59",
+              "sourceStep": "/api/3/workflow_steps/10569d96-dd7c-4550-8664-6bd4194bd709",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "bcd2535a-7c13-4084-807b-3af5dbd6c9bb"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "15cdf0d2-abc5-4730-aab4-660c54946eeb",
+          "id": 4599,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Container Statistics",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Retrieves resource usage and performance statistics for a Docker container, including CPU, memory, network, process, block I/O, and storage information.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/9b9e313a-9ae2-4592-a5dd-7a33cd78ba98",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Container Statistics",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "id": "",
+                  "stream": true,
+                  "oneshot": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "container_stats",
+                "operationTitle": "Container Statistics"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "933078e2-23ed-4e24-9bb4-5d705252c662"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "9b9e313a-9ae2-4592-a5dd-7a33cd78ba98"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Container Statistics",
+              "targetStep": "/api/3/workflow_steps/933078e2-23ed-4e24-9bb4-5d705252c662",
+              "sourceStep": "/api/3/workflow_steps/9b9e313a-9ae2-4592-a5dd-7a33cd78ba98",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "9e53f827-ed0f-4cbc-9cbe-5827d8852ea1"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "1da93294-6763-44a9-bedb-0beaf4056dda",
+          "id": 4578,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Pull Image",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Pulls a Docker image from a registry or imports an image from the specified source.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/a1269c3a-bb61-4a75-abc4-d5e85409c352",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Pull Image",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "tag": "",
+                  "repo": "",
+                  "fromSrc": "",
+                  "message": "",
+                  "fromImage": "",
+                  "additional_fields": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "pull_image",
+                "operationTitle": "Pull Image"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "04688cfb-393f-4b47-90a7-db8aa1fd9e74"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "a1269c3a-bb61-4a75-abc4-d5e85409c352"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Pull Image",
+              "targetStep": "/api/3/workflow_steps/04688cfb-393f-4b47-90a7-db8aa1fd9e74",
+              "sourceStep": "/api/3/workflow_steps/a1269c3a-bb61-4a75-abc4-d5e85409c352",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "ab148039-96a8-4156-a28c-0bf485c445cf"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "33977e99-0498-4ef2-b401-106fbfcd52eb",
+          "id": 4598,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "List Containers",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Retrieves a list of Docker containers and their configuration, status, networking, storage, and image information.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/d8a5d194-97d1-429c-bbca-9032452a9fc3",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "List Containers",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "all": "",
+                  "size": "",
+                  "limit": "",
+                  "filters": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "list_containers",
+                "operationTitle": "List Containers"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "35b9f997-cd8d-4a43-b215-6e4ee4907458"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "d8a5d194-97d1-429c-bbca-9032452a9fc3"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> List Containers",
+              "targetStep": "/api/3/workflow_steps/35b9f997-cd8d-4a43-b215-6e4ee4907458",
+              "sourceStep": "/api/3/workflow_steps/d8a5d194-97d1-429c-bbca-9032452a9fc3",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "4a887c15-5341-4f3d-a0d2-bd75fa9307e2"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "36d4effc-82ba-4579-b0e1-3153d3f3eabd",
+          "id": 4575,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Prune Containers",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Removes unused Docker containers based on the specified filters.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/f6be6fb1-6fdd-4c70-8091-32f0b1b3068f",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Prune Containers",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "filters": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "prune_containers",
+                "operationTitle": "Prune Containers"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "6fd26e2f-1e8a-43ec-b90e-c514e1d10e31"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "f6be6fb1-6fdd-4c70-8091-32f0b1b3068f"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Prune Containers",
+              "targetStep": "/api/3/workflow_steps/6fd26e2f-1e8a-43ec-b90e-c514e1d10e31",
+              "sourceStep": "/api/3/workflow_steps/f6be6fb1-6fdd-4c70-8091-32f0b1b3068f",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "3ebe6bdf-0fd6-4508-8474-73aeb9cf4c9d"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "3a8f8e22-3796-44c3-a82b-79398865acd0",
+          "id": 4584,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get System Information",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Retrieves detailed information about the Docker environment, including containers, images, storage and logging drivers, runtime configuration, system resources, operating system, kernel, networking, security options, registry configuration, and Docker services.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/77bb1640-748c-4b18-a211-e787f893d8fb",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get System Information",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "get_info",
+                "operationTitle": "Get System Information"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "8b07b8c0-86c8-48c2-a92f-45b17298e973"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "77bb1640-748c-4b18-a211-e787f893d8fb"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Get System Information",
+              "targetStep": "/api/3/workflow_steps/8b07b8c0-86c8-48c2-a92f-45b17298e973",
+              "sourceStep": "/api/3/workflow_steps/77bb1640-748c-4b18-a211-e787f893d8fb",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "2eae215b-c915-424b-b64f-c7db5da91fbb"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "3b754821-1176-4fe4-bb95-274a2de115a2",
+          "id": 4571,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Version",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Retrieves version and system information for the Docker environment, including Docker version, API compatibility, operating system, architecture, kernel, build details, and installed components.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/c65ab3b1-3496-4498-be67-85b7c9864fa7",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Version",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "get_version",
+                "operationTitle": "Get Version"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "67e4ec5a-51d1-4e5a-8168-83c865fef706"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "c65ab3b1-3496-4498-be67-85b7c9864fa7"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Get Version",
+              "targetStep": "/api/3/workflow_steps/67e4ec5a-51d1-4e5a-8168-83c865fef706",
+              "sourceStep": "/api/3/workflow_steps/c65ab3b1-3496-4498-be67-85b7c9864fa7",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "d0763dde-8ed4-487a-83c4-b067e2c52790"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "41c8d525-c267-4a86-96ef-25ce395f5e2f",
+          "id": 4570,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Start Container",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Starts a stopped Docker container.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/4e836a0a-8b93-4dfe-8468-7e941b53a3e8",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "4e836a0a-8b93-4dfe-8468-7e941b53a3e8"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start Container",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "id": "",
+                  "detachKeys": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "start_container",
+                "operationTitle": "Start Container"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "3e0939f1-0e66-43b0-b2d8-65ec185ccd30"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Start Container",
+              "targetStep": "/api/3/workflow_steps/3e0939f1-0e66-43b0-b2d8-65ec185ccd30",
+              "sourceStep": "/api/3/workflow_steps/4e836a0a-8b93-4dfe-8468-7e941b53a3e8",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "5f029347-18c6-4dcd-9564-f05d8bd760cb"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "42d870a4-93a5-446b-8796-a8b12d2d97a4",
+          "id": 4585,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Search Images",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Searches Docker Hub for images matching the specified search term and returns image details such as name, description, popularity, and official or automated status.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/353e56a6-5315-4ff3-b6ad-70e309ac30c6",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Search Images",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "term": "",
+                  "limit": 25,
+                  "filters": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "search_images",
+                "operationTitle": "Search Images"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "c92a9e7f-913c-446b-b4c5-f5ee9f0503b4"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "353e56a6-5315-4ff3-b6ad-70e309ac30c6"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Search Images",
+              "targetStep": "/api/3/workflow_steps/c92a9e7f-913c-446b-b4c5-f5ee9f0503b4",
+              "sourceStep": "/api/3/workflow_steps/353e56a6-5315-4ff3-b6ad-70e309ac30c6",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "fd5c9500-1f86-4b0b-8c55-50960ee74dd2"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "437c3529-a9bd-4f3d-88c7-6be4211a73ea",
+          "id": 4600,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Remove Volume",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Removes a Docker volume from the Docker host.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/05d7101e-30a4-495f-b444-6f16eccea2f1",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Remove Volume",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "name": "",
+                  "force": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "remove_volume",
+                "operationTitle": "Remove Volume"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "ead6a18c-f32a-458b-8535-eb45e4515e06"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "05d7101e-30a4-495f-b444-6f16eccea2f1"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Remove Volume",
+              "targetStep": "/api/3/workflow_steps/ead6a18c-f32a-458b-8535-eb45e4515e06",
+              "sourceStep": "/api/3/workflow_steps/05d7101e-30a4-495f-b444-6f16eccea2f1",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "82912353-69e4-42c8-ab17-343d20a038f6"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "481f8000-ee57-46ca-a0dd-07c5d5da0e70",
+          "id": 4617,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Prune Images",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Removes unused Docker images from the local image store based on the specified filters.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/3796a291-3279-42a3-a587-8c4113cc8347",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Prune Images",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "filters": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "prune_images",
+                "operationTitle": "Prune Images"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "c2d33e49-a474-4869-8db7-88feec398a8e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "3796a291-3279-42a3-a587-8c4113cc8347"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Prune Images",
+              "targetStep": "/api/3/workflow_steps/c2d33e49-a474-4869-8db7-88feec398a8e",
+              "sourceStep": "/api/3/workflow_steps/3796a291-3279-42a3-a587-8c4113cc8347",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "0536628e-4d19-4280-be4e-c41ad8ef83c1"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "4c6e7f8a-4966-470e-b8d6-6277bc81f832",
+          "id": 4606,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Remove Network",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Removes a Docker network from the Docker host.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/7ad5a472-8d14-4457-87dc-85b29f4d454f",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Remove Network",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "id": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "remove_network",
+                "operationTitle": "Remove Network"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "9724ffda-a94c-4fa7-a637-6b3717b52ad3"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "7ad5a472-8d14-4457-87dc-85b29f4d454f"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Remove Network",
+              "targetStep": "/api/3/workflow_steps/9724ffda-a94c-4fa7-a637-6b3717b52ad3",
+              "sourceStep": "/api/3/workflow_steps/7ad5a472-8d14-4457-87dc-85b29f4d454f",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "c9d2520e-68c5-47fa-922f-6ced8c1df466"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "573f6b50-72f6-4880-9643-693418c94112",
+          "id": 4612,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Container Logs",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Retrieves logs generated by a Docker container, with options to filter the output by time, stream, number of lines, and timestamps.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/494bfe05-c9f8-4712-a39b-1bc3b7df4a3b",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Container Logs",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "id": "",
+                  "tail": "all",
+                  "since": "",
+                  "until": "",
+                  "follow": "",
+                  "stderr": "",
+                  "stdout": "",
+                  "timestamps": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "container_logs",
+                "operationTitle": "Container Logs"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "1146678b-2268-4f9e-8489-956fd0a00156"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "494bfe05-c9f8-4712-a39b-1bc3b7df4a3b"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Container Logs",
+              "targetStep": "/api/3/workflow_steps/1146678b-2268-4f9e-8489-956fd0a00156",
+              "sourceStep": "/api/3/workflow_steps/494bfe05-c9f8-4712-a39b-1bc3b7df4a3b",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "3d82b02b-19e6-4355-8dd9-e0e29711bd1f"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "57f9d5d2-7d93-459b-8d26-cbaf1ba17cdf",
+          "id": 4577,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Exec in Container",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Runs a command inside a running Docker container with the specified execution and input/output settings.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/1ab63d74-e654-4f7b-a58c-53598d2518f9",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Exec in Container",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "id": "",
+                  "Cmd": "",
+                  "Tty": true,
+                  "User": "",
+                  "Detach": "",
+                  "Privileged": "",
+                  "WorkingDir": "",
+                  "AttachStdin": "",
+                  "AttachStderr": "",
+                  "AttachStdout": "",
+                  "additional_fields": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "exec_container",
+                "operationTitle": "Exec in Container"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "8aac5e9e-dd8f-4b05-8ae0-5ae25c7ba549"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "1ab63d74-e654-4f7b-a58c-53598d2518f9"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Exec in Container",
+              "targetStep": "/api/3/workflow_steps/8aac5e9e-dd8f-4b05-8ae0-5ae25c7ba549",
+              "sourceStep": "/api/3/workflow_steps/1ab63d74-e654-4f7b-a58c-53598d2518f9",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "d264ded1-784d-49c8-b7d9-de48709aae31"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "5d8b0e83-7f31-47c0-9c51-8065219560bf",
+          "id": 4591,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Pause Container",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Pauses all processes running inside a Docker container.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/3cbb8b52-81e2-4d2d-b5bb-58097c640cc4",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Pause Container",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "id": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "pause_container",
+                "operationTitle": "Pause Container"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "988195c2-d10c-49ce-a3e8-24538e8aba6b"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "3cbb8b52-81e2-4d2d-b5bb-58097c640cc4"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Pause Container",
+              "targetStep": "/api/3/workflow_steps/988195c2-d10c-49ce-a3e8-24538e8aba6b",
+              "sourceStep": "/api/3/workflow_steps/3cbb8b52-81e2-4d2d-b5bb-58097c640cc4",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "b029aebf-95ab-4327-8266-494bbceaf037"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "76a361f0-3ad2-4ab2-8c02-df7694276549",
+          "id": 4589,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Inspect Container",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Retrieves detailed information about a Docker container, including its configuration, current state, networking, storage, mounts, resource settings, and runtime details.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/ccfe1b21-c42c-4985-b22b-d4b811f5d9b8",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Inspect Container",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "id": "",
+                  "size": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "inspect_container",
+                "operationTitle": "Inspect Container"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "d615e6db-b56b-49fe-beff-3a5bc830cad4"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "ccfe1b21-c42c-4985-b22b-d4b811f5d9b8"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Inspect Container",
+              "targetStep": "/api/3/workflow_steps/d615e6db-b56b-49fe-beff-3a5bc830cad4",
+              "sourceStep": "/api/3/workflow_steps/ccfe1b21-c42c-4985-b22b-d4b811f5d9b8",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "1255ab6a-55e3-4345-9e2c-d013a3a6dba3"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "771d39ab-692c-47f2-8fac-056e1f104818",
+          "id": 4576,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Wait Container",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Waits for a Docker container to reach the specified condition and returns its exit status.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/fce87bd6-b2f8-4d52-930a-08874c190a7b",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "fce87bd6-b2f8-4d52-930a-08874c190a7b"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Wait Container",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "id": "",
+                  "condition": "Not Running"
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "wait_container",
+                "operationTitle": "Wait Container"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "28aa564c-9554-4705-a47b-f29e72470516"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Wait Container",
+              "targetStep": "/api/3/workflow_steps/28aa564c-9554-4705-a47b-f29e72470516",
+              "sourceStep": "/api/3/workflow_steps/fce87bd6-b2f8-4d52-930a-08874c190a7b",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "9d71091c-534c-49d5-a54e-9f95388813ae"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "7a80a86f-39aa-4709-8161-361c55fd2755",
+          "id": 4579,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Tag Image",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Creates an additional tag reference for a Docker image, optionally using a different repository name and tag.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/c78e04aa-053d-4ba4-8fb3-f5dc1fecb76b",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "c78e04aa-053d-4ba4-8fb3-f5dc1fecb76b"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Tag Image",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "tag": "",
+                  "name": "",
+                  "repo": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "tag_image",
+                "operationTitle": "Tag Image"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "d5f0c168-5ba6-41ba-a631-2d4be9bea735"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Tag Image",
+              "targetStep": "/api/3/workflow_steps/d5f0c168-5ba6-41ba-a631-2d4be9bea735",
+              "sourceStep": "/api/3/workflow_steps/c78e04aa-053d-4ba4-8fb3-f5dc1fecb76b",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "18b95bcf-6175-45e4-9446-427260cccdc6"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "7cd58b1a-2e27-44db-9165-171bad5e1bf8",
+          "id": 4603,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Image History",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Retrieves the layer history of a Docker image, including layer IDs, sizes, tags, creation details, and commands used to create each layer.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/bab561eb-e744-4b97-bca3-f067fea8a554",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Image History",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "id": "",
+                  "platform": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "image_history",
+                "operationTitle": "Image History"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "510a7b77-2db7-4e08-98c9-b0fb5380fd4f"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "bab561eb-e744-4b97-bca3-f067fea8a554"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Image History",
+              "targetStep": "/api/3/workflow_steps/510a7b77-2db7-4e08-98c9-b0fb5380fd4f",
+              "sourceStep": "/api/3/workflow_steps/bab561eb-e744-4b97-bca3-f067fea8a554",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "c6bbb986-3603-4463-91bb-ebbc600bcaa8"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "7d619597-773a-47eb-8601-1e8a8bdca7e0",
+          "id": 4602,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Update Container",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Updates the configuration of an existing Docker container without recreating it.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/8ee495b2-4d33-479c-978f-a18f7d64a75a",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "8ee495b2-4d33-479c-978f-a18f7d64a75a"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Update Container",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "id": "",
+                  "Memory": "",
+                  "CpuQuota": "",
+                  "CpuPeriod": "",
+                  "CpuShares": "",
+                  "additional_fields": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "update_container",
+                "operationTitle": "Update Container"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "940d6b10-f9fd-4269-bde4-95c61b2e4e45"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Update Container",
+              "targetStep": "/api/3/workflow_steps/940d6b10-f9fd-4269-bde4-95c61b2e4e45",
+              "sourceStep": "/api/3/workflow_steps/8ee495b2-4d33-479c-978f-a18f7d64a75a",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "7e3daade-5e5a-4b80-80b0-86e34b394a8f"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "85b7f6cc-9e38-4eeb-8e2a-9956cda03113",
+          "id": 4581,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "List Networks",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Retrieves a list of Docker networks and their configuration, including drivers, scopes, IPAM settings, labels, and connectivity options.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/b6fe8df0-c626-4f1e-ae58-cb40f129503c",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "List Networks",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "filters": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "list_networks",
+                "operationTitle": "List Networks"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "4964f652-1e25-4ee6-a090-4a8b9c0c56f0"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "b6fe8df0-c626-4f1e-ae58-cb40f129503c"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> List Networks",
+              "targetStep": "/api/3/workflow_steps/4964f652-1e25-4ee6-a090-4a8b9c0c56f0",
+              "sourceStep": "/api/3/workflow_steps/b6fe8df0-c626-4f1e-ae58-cb40f129503c",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "f68cf915-75cd-4fc9-8d16-1c50e16dcfd7"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "865ed1fb-b06f-4fb1-8a78-fa64368566f0",
+          "id": 4608,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "List Volumes",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Retrieves a list of Docker volumes and their configuration, including names, drivers, scopes, labels, options, and mount points.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/34e7be4d-11ba-4286-bc7f-6222bb3f2cb8",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "List Volumes",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "filters": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "list_volumes",
+                "operationTitle": "List Volumes"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "b1a5580b-6496-4b66-a260-31da57e87959"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "34e7be4d-11ba-4286-bc7f-6222bb3f2cb8"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> List Volumes",
+              "targetStep": "/api/3/workflow_steps/b1a5580b-6496-4b66-a260-31da57e87959",
+              "sourceStep": "/api/3/workflow_steps/34e7be4d-11ba-4286-bc7f-6222bb3f2cb8",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "3fb454fa-db6c-45ca-8407-bd2d9647ddb9"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "8ec2fa8c-2c0e-4301-b04c-f266010afe02",
+          "id": 4615,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Commit Container",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Creates a new Docker image from the current state of a container.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/81486d52-5ac8-4746-a097-e36056a26345",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Commit Container",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "id": "",
+                  "tag": "latest",
+                  "repo": "",
+                  "pause": true,
+                  "author": "",
+                  "changes": "",
+                  "comment": "",
+                  "additional_fields": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "container_commit",
+                "operationTitle": "Commit Container"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "9be2067a-0857-4717-9f51-d3c90df1171a"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "81486d52-5ac8-4746-a097-e36056a26345"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Commit Container",
+              "targetStep": "/api/3/workflow_steps/9be2067a-0857-4717-9f51-d3c90df1171a",
+              "sourceStep": "/api/3/workflow_steps/81486d52-5ac8-4746-a097-e36056a26345",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "e663c50f-004d-4bf2-85ef-b0f9a9d06bac"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "957ae3a6-956d-4b55-b06c-614e5d5e77b9",
+          "id": 4596,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "System Disk Usage",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Retrieves disk space usage information for Docker containers, images, volumes, and build cache.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/31e4f17a-d977-4b53-a5d5-f379d5fc08ca",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "31e4f17a-d977-4b53-a5d5-f379d5fc08ca"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "System Disk Usage",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "type": "",
+                  "verbose": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "system_df",
+                "operationTitle": "System Disk Usage"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "4a330428-f70a-44cd-8380-0e558aa141e1"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> System Disk Usage",
+              "targetStep": "/api/3/workflow_steps/4a330428-f70a-44cd-8380-0e558aa141e1",
+              "sourceStep": "/api/3/workflow_steps/31e4f17a-d977-4b53-a5d5-f379d5fc08ca",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "5ef169e4-947d-4de6-aed4-f783753712d6"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "a53bffc0-3c0a-4f53-bd31-0cdf1421223e",
+          "id": 4572,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Stop Container",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Stops a running Docker container gracefully, with an optional timeout before it is forcibly terminated.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/d350975c-158c-4086-a8ac-a852c3729b2a",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "d350975c-158c-4086-a8ac-a852c3729b2a"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Stop Container",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "t": "",
+                  "id": "",
+                  "signal": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "stop_container",
+                "operationTitle": "Stop Container"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "579326e3-4282-4120-89b6-7fb59ad39037"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Stop Container",
+              "targetStep": "/api/3/workflow_steps/579326e3-4282-4120-89b6-7fb59ad39037",
+              "sourceStep": "/api/3/workflow_steps/d350975c-158c-4086-a8ac-a852c3729b2a",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "aa1ca02e-ee60-43d4-8f6d-b66ffe90bc24"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "a555725b-2dc9-4ff7-a2ff-2c3197e19706",
+          "id": 4586,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Ping",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Checks the connectivity and availability of the Docker daemon.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/cfef6315-2944-45dc-bc42-0d756af83250",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Ping",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "ping",
+                "operationTitle": "Ping"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "7f75c49a-9e2d-4531-a4d3-2390fe5cfb4c"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "cfef6315-2944-45dc-bc42-0d756af83250"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Ping",
+              "targetStep": "/api/3/workflow_steps/7f75c49a-9e2d-4531-a4d3-2390fe5cfb4c",
+              "sourceStep": "/api/3/workflow_steps/cfef6315-2944-45dc-bc42-0d756af83250",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "5b3a7d7f-47e3-47b7-b2ee-a1ee8e7eeb0b"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "a923424b-308e-488c-919f-8aece5f6d76c",
+          "id": 4569,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Export Container",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Exports the filesystem contents of a Docker container as a tar archive.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/b0d3bb5f-71fd-4e93-bc1b-a29a2d002f66",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Export Container",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "id": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "container_export",
+                "operationTitle": "Export Container"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "4f846137-0296-4e88-8c96-4433a38bdfee"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "b0d3bb5f-71fd-4e93-bc1b-a29a2d002f66"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Export Container",
+              "targetStep": "/api/3/workflow_steps/4f846137-0296-4e88-8c96-4433a38bdfee",
+              "sourceStep": "/api/3/workflow_steps/b0d3bb5f-71fd-4e93-bc1b-a29a2d002f66",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "15c86d09-93b8-4ff2-a20f-981f0d103405"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "ad20ef76-236a-4575-8b08-1999b598f440",
+          "id": 4595,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "System Events",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Streams real-time events from the Docker environment, including events related to containers, images, networks, volumes, and other Docker resources.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/f4e8b06a-d1c9-4342-a26f-1f4a87b87bc5",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "f4e8b06a-d1c9-4342-a26f-1f4a87b87bc5"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "System Events",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "since": "",
+                  "until": "",
+                  "filters": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "system_events",
+                "operationTitle": "System Events"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "60423661-10aa-4f38-b34c-aa389d96e712"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> System Events",
+              "targetStep": "/api/3/workflow_steps/60423661-10aa-4f38-b34c-aa389d96e712",
+              "sourceStep": "/api/3/workflow_steps/f4e8b06a-d1c9-4342-a26f-1f4a87b87bc5",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "e880c9f0-5c55-4924-8506-9854c6af1caf"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "b2cde6e9-729d-4bdd-b0a2-599db33e07d6",
+          "id": 4573,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Copy From Container",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Copies a file or directory from a Docker container and stores it as a tar archive.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/f6e4bc31-b932-44d6-9c92-2190be1ea1e0",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Copy From Container",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "id": "",
+                  "path": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "copy_from_container",
+                "operationTitle": "Copy From Container"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "69a77cc5-1741-4a97-9fd8-d945da287847"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "f6e4bc31-b932-44d6-9c92-2190be1ea1e0"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Copy From Container",
+              "targetStep": "/api/3/workflow_steps/69a77cc5-1741-4a97-9fd8-d945da287847",
+              "sourceStep": "/api/3/workflow_steps/f6e4bc31-b932-44d6-9c92-2190be1ea1e0",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "ccb5efd0-6ec8-4c8d-980f-a45393070aac"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "b4c30e4c-828c-4973-b087-6993ef7dcc60",
+          "id": 4594,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Restart Container",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Restarts a Docker container, with an optional timeout for gracefully stopping it before it is forcibly terminated.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/90142896-d192-4c32-b66c-99ba300be2ec",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Restart Container",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "t": "",
+                  "id": "",
+                  "signal": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "restart_container",
+                "operationTitle": "Restart Container"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "8c817296-f7ff-4677-95fa-38379829b100"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "90142896-d192-4c32-b66c-99ba300be2ec"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Restart Container",
+              "targetStep": "/api/3/workflow_steps/8c817296-f7ff-4677-95fa-38379829b100",
+              "sourceStep": "/api/3/workflow_steps/90142896-d192-4c32-b66c-99ba300be2ec",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "a8b168cc-7494-4c8e-8bc5-14323b99dbf8"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "b8541370-c8d3-45a9-9fdf-1aee725164c1",
+          "id": 4587,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Prune Networks",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Removes unused Docker networks from the Docker host based on the specified filters.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/c8fe7692-c29c-4399-9a08-3c4011c66789",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Prune Networks",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "filters": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "prune_networks",
+                "operationTitle": "Prune Networks"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "67acb6f9-b023-4f85-87c4-75781679b6c1"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "c8fe7692-c29c-4399-9a08-3c4011c66789"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Prune Networks",
+              "targetStep": "/api/3/workflow_steps/67acb6f9-b023-4f85-87c4-75781679b6c1",
+              "sourceStep": "/api/3/workflow_steps/c8fe7692-c29c-4399-9a08-3c4011c66789",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "c2a716de-fc98-4f13-834c-deac9ee6a08a"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "baa52702-a49c-432d-9300-cfea79bf4e5d",
+          "id": 4613,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Disconnect Network",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Disconnects a Docker container from a network.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/c07c45bd-826b-4fe8-aa4a-e9b963ce11f6",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Disconnect Network",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "id": "",
+                  "Force": "",
+                  "Container": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "disconnect_network",
+                "operationTitle": "Disconnect Network"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "166fa6fc-e890-4805-b99e-c87d92c0d0fd"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "c07c45bd-826b-4fe8-aa4a-e9b963ce11f6"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Disconnect Network",
+              "targetStep": "/api/3/workflow_steps/166fa6fc-e890-4805-b99e-c87d92c0d0fd",
+              "sourceStep": "/api/3/workflow_steps/c07c45bd-826b-4fe8-aa4a-e9b963ce11f6",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "9dbb5b27-9736-487b-979e-38f190c97c8a"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "c32a4973-d839-40d4-a5c3-fcbc3350b28a",
+          "id": 4611,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Inspect Network",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Retrieves detailed information about a Docker network, including its configuration, IPAM settings, connected containers, and network options.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/a34e3a35-02a6-40b6-8db9-3c1382c759bf",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Inspect Network",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "id": "",
+                  "scope": "",
+                  "verbose": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "inspect_network",
+                "operationTitle": "Inspect Network"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "cf353f20-0c44-48d2-9a89-79c4ca3e6d82"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "a34e3a35-02a6-40b6-8db9-3c1382c759bf"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Inspect Network",
+              "targetStep": "/api/3/workflow_steps/cf353f20-0c44-48d2-9a89-79c4ca3e6d82",
+              "sourceStep": "/api/3/workflow_steps/a34e3a35-02a6-40b6-8db9-3c1382c759bf",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "4fe7d56d-d38d-421c-bf00-05bc01acdaed"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "c6476139-e808-4876-aa96-90fa7d448c7d",
+          "id": 4609,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Create Volume",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Creates a Docker volume using the specified name, driver, and configuration.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/19f082ad-90ab-42c4-aed5-c8787e074ba3",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Volume",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "Name": "",
+                  "Driver": "local",
+                  "additional_fields": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "create_volume",
+                "operationTitle": "Create Volume"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "eeb24ea2-f475-48a8-be01-39ab728209ff"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "19f082ad-90ab-42c4-aed5-c8787e074ba3"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Create Volume",
+              "targetStep": "/api/3/workflow_steps/eeb24ea2-f475-48a8-be01-39ab728209ff",
+              "sourceStep": "/api/3/workflow_steps/19f082ad-90ab-42c4-aed5-c8787e074ba3",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "2eca2476-6307-4e40-b1a6-423af1dfffa7"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "c7267dcb-607c-447a-86ed-4771b963b883",
+          "id": 4614,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Rename Container",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Renames an existing Docker container with the specified name.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/ffa6146f-cea9-4d7e-9b14-e13f1d0f9070",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Rename Container",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "id": "",
+                  "name": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "rename_container",
+                "operationTitle": "Rename Container"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "bba7f6a3-9250-4986-84a8-f9f5feb62201"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "ffa6146f-cea9-4d7e-9b14-e13f1d0f9070"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Rename Container",
+              "targetStep": "/api/3/workflow_steps/bba7f6a3-9250-4986-84a8-f9f5feb62201",
+              "sourceStep": "/api/3/workflow_steps/ffa6146f-cea9-4d7e-9b14-e13f1d0f9070",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "8288c89b-d0a2-46b8-ade3-185b80535780"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "c9427266-7d01-4f35-afd4-ea3e2e29bc66",
+          "id": 4580,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Connect Network",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Connects a Docker container to a network. The network must be local-scoped or a swarm-scoped network configured as attachable.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/6754a2f1-7973-4852-aaaf-f27efa436c66",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Connect Network",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "id": "",
+                  "Container": "",
+                  "additional_fields": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "connect_network",
+                "operationTitle": "Connect Network"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "edaa3d88-845f-4b0c-88ed-c5719807a898"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "6754a2f1-7973-4852-aaaf-f27efa436c66"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Connect Network",
+              "targetStep": "/api/3/workflow_steps/edaa3d88-845f-4b0c-88ed-c5719807a898",
+              "sourceStep": "/api/3/workflow_steps/6754a2f1-7973-4852-aaaf-f27efa436c66",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "6772ce5b-6c30-4b82-b592-ec8727e94e64"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "cd715b2a-63fe-4ddf-8191-0551486dc0dd",
+          "id": 4610,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Inspect Image",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Retrieves detailed, low-level information about a Docker image, including its configuration, metadata, filesystem layers, platform, tags, and digests.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/11e00c12-a3a3-4e14-96f3-ad1fda336b9b",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Inspect Image",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "name": "",
+                  "manifests": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "inspect_image",
+                "operationTitle": "Inspect Image"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "229ab23d-de97-466b-bcc9-7dc6429a34f5"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "11e00c12-a3a3-4e14-96f3-ad1fda336b9b"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Inspect Image",
+              "targetStep": "/api/3/workflow_steps/229ab23d-de97-466b-bcc9-7dc6429a34f5",
+              "sourceStep": "/api/3/workflow_steps/11e00c12-a3a3-4e14-96f3-ad1fda336b9b",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "4481f155-2e0e-40ac-bbab-7f4caa7ac666"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "cf6f1e75-7f8a-44ab-8337-1fae0c5fbcdd",
+          "id": 4601,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Remove Container",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Removes a Docker container and optionally removes its associated anonymous volumes or link.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/ac942f91-df21-4833-92b4-396c119c50c4",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Remove Container",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "v": "",
+                  "id": "",
+                  "link": "",
+                  "force": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "remove_container",
+                "operationTitle": "Remove Container"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "d1160e05-907d-4125-9ce6-32f1d59e2336"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "ac942f91-df21-4833-92b4-396c119c50c4"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Remove Container",
+              "targetStep": "/api/3/workflow_steps/d1160e05-907d-4125-9ce6-32f1d59e2336",
+              "sourceStep": "/api/3/workflow_steps/ac942f91-df21-4833-92b4-396c119c50c4",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "8313943a-fe4d-452e-90c9-82f1e626bc37"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "d37133aa-110d-40fa-9f61-f8772bc424f9",
+          "id": 4583,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Kill Container",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Forcefully stops a Docker container by sending the specified signal.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/1acb8f4c-258e-4a6b-8177-82405160ecba",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Kill Container",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "id": "",
+                  "signal": "SIGKILL"
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "kill_container",
+                "operationTitle": "Kill Container"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "31e9fccb-9925-4f48-9546-943ae734800c"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "1acb8f4c-258e-4a6b-8177-82405160ecba"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Kill Container",
+              "targetStep": "/api/3/workflow_steps/31e9fccb-9925-4f48-9546-943ae734800c",
+              "sourceStep": "/api/3/workflow_steps/1acb8f4c-258e-4a6b-8177-82405160ecba",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "f27a2838-f973-44ee-b793-f9279071f3ba"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "d3ee2fdf-9ac2-46bb-92b7-12ab5b897307",
+          "id": 4588,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Copy To Container",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Copies a tar archive to a specified directory in a Docker container and extracts its contents there.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1790607522,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/d1625264-1b87-4c90-90dd-cbc3f574951d",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Copy To Container",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "id": "",
+                  "path": "",
+                  "input": "",
+                  "value": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "copy_to_container",
+                "operationTitle": "Copy To Container"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "9336802c-64d4-4646-888f-66af712bfd53"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "6d592870-3cb5-43cd-b4ed-c921350cdef0",
+                "title": "Docker: Copy To Container",
+                "resources": [
+                  "attachments"
+                ],
+                "__triggerLimit": true,
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "triggerOnSource": true,
+                "displayConditions": {
+                  "attachments": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": false,
+                "showToasterMessage": {
+                  "visible": false,
+                  "messageVisible": true
+                },
+                "triggerOnReplicate": false,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "d1625264-1b87-4c90-90dd-cbc3f574951d"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Copy To Container",
+              "targetStep": "/api/3/workflow_steps/9336802c-64d4-4646-888f-66af712bfd53",
+              "sourceStep": "/api/3/workflow_steps/d1625264-1b87-4c90-90dd-cbc3f574951d",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "08ab7042-029b-4a70-b5c1-cea9fd7214b4"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "d5ddac21-d17a-4d26-bd6b-1b21bc26390c",
+          "id": 4582,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Build Image",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Builds a Docker image from the specified Dockerfile content and build configuration.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/0ea6c6d3-ab94-45f0-b11f-41ce69247fd2",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Build Image",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "t": "",
+                  "pull": "",
+                  "labels": "",
+                  "nocache": "",
+                  "platform": "",
+                  "buildargs": "",
+                  "networkmode": "",
+                  "additional_fields": "",
+                  "dockerfile_content": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "build_image",
+                "operationTitle": "Build Image"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "a36e1d9f-74f0-4a85-9d86-c516b3eb89a7"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "0ea6c6d3-ab94-45f0-b11f-41ce69247fd2"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Build Image",
+              "targetStep": "/api/3/workflow_steps/a36e1d9f-74f0-4a85-9d86-c516b3eb89a7",
+              "sourceStep": "/api/3/workflow_steps/0ea6c6d3-ab94-45f0-b11f-41ce69247fd2",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "adb41161-0b85-4ade-a283-0c7ae198512c"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "d77058e5-4fa8-4dbb-abfa-755cd12f5b6d",
+          "id": 4597,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Resize Container TTY",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Resizes the TTY session of a Docker container to the specified height and width.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/7248b1be-d99e-46f8-b9f7-bc60086fe2a0",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Resize Container TTY",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "h": "",
+                  "w": "",
+                  "id": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "resize_container",
+                "operationTitle": "Resize Container TTY"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "a7af6fe9-d905-427b-a347-1469a4a9bdfe"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "7248b1be-d99e-46f8-b9f7-bc60086fe2a0"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Resize Container TTY",
+              "targetStep": "/api/3/workflow_steps/a7af6fe9-d905-427b-a347-1469a4a9bdfe",
+              "sourceStep": "/api/3/workflow_steps/7248b1be-d99e-46f8-b9f7-bc60086fe2a0",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "4551ccc4-0c9c-4dfa-97bb-53a32f094a78"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "dfbb43be-5c70-4b2a-838f-6cb738e8480e",
+          "id": 4593,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Create Container",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Creates a new Docker container using the specified image and configuration.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/b9897156-5371-40e8-a129-e1ed7a81d160",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Container",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "Cmd": "",
+                  "name": "",
+                  "image": "",
+                  "Hostname": "",
+                  "platform": "",
+                  "HostConfig": "",
+                  "domain_name": "",
+                  "additional_fields": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "create_container",
+                "operationTitle": "Create Container"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "9a049889-73c8-4ab2-9d8d-42f160c85265"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "b9897156-5371-40e8-a129-e1ed7a81d160"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Create Container",
+              "targetStep": "/api/3/workflow_steps/9a049889-73c8-4ab2-9d8d-42f160c85265",
+              "sourceStep": "/api/3/workflow_steps/b9897156-5371-40e8-a129-e1ed7a81d160",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "a9fda60b-aeb5-4c27-801e-97aa259ac64b"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "e1e7b701-b87d-452e-9b42-05ad2ef739fa",
+          "id": 4574,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Push Image",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Pushes a Docker image from the local image store to a container registry.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/607fe13e-da37-495c-8bb6-d3d2db3f9a66",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Push Image",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "tag": "",
+                  "name": "",
+                  "platform": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "push_image",
+                "operationTitle": "Push Image"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "72f783ae-f134-4888-be35-c62fe4261d24"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "607fe13e-da37-495c-8bb6-d3d2db3f9a66"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Push Image",
+              "targetStep": "/api/3/workflow_steps/72f783ae-f134-4888-be35-c62fe4261d24",
+              "sourceStep": "/api/3/workflow_steps/607fe13e-da37-495c-8bb6-d3d2db3f9a66",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "a483dc70-da31-431b-8856-a0993a563e11"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "e9253b6f-3441-4ac1-bbe1-0a393b39849a",
+          "id": 4604,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Attach Container",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Attaches to a Docker container to read its output or provide input through the selected streams.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/bc172cae-140a-4bb5-b0b1-6f19948b732b",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Attach Container",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "id": "",
+                  "logs": "",
+                  "stdin": "",
+                  "stderr": "",
+                  "stdout": "",
+                  "stream": "",
+                  "detachKeys": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "attach_container",
+                "operationTitle": "Attach Container"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "265e07c7-5bab-4b5f-8a85-9df2e8d718d9"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "bc172cae-140a-4bb5-b0b1-6f19948b732b"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Attach Container",
+              "targetStep": "/api/3/workflow_steps/265e07c7-5bab-4b5f-8a85-9df2e8d718d9",
+              "sourceStep": "/api/3/workflow_steps/bc172cae-140a-4bb5-b0b1-6f19948b732b",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "78845a99-ba6b-4286-af37-fc5157407574"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "ecdb694e-f9d8-4f1f-9deb-4f0b70a04e11",
+          "id": 4592,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Remove Image",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Removes a Docker image from the local image store and optionally removes its untagged parent images.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/ff63141e-9ea3-4eaa-833c-90d63cf26fae",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Remove Image",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "name": "",
+                  "force": "",
+                  "noprune": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "remove_image",
+                "operationTitle": "Remove Image"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "5af661c2-e9e8-4b43-81e5-2adf209a123d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "ff63141e-9ea3-4eaa-833c-90d63cf26fae"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Remove Image",
+              "targetStep": "/api/3/workflow_steps/5af661c2-e9e8-4b43-81e5-2adf209a123d",
+              "sourceStep": "/api/3/workflow_steps/ff63141e-9ea3-4eaa-833c-90d63cf26fae",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "71f4dc69-1273-4f00-9d8a-08e32dd9576d"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "f20156fc-9acf-4112-bcf6-971cd8736aad",
+          "id": 4605,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Prune Volumes",
+          "aliasName": null,
+          "tag": "#Docker",
+          "description": "Removes unused Docker volumes from the Docker host based on the specified filters.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/5b7203c9-38e6-413f-a080-b40338673ec7",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/fff111ca-c07b-4d46-9a95-21a116be4d88",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Prune Volumes",
+              "description": null,
+              "arguments": {
+                "name": "Docker",
+                "config": "",
+                "params": {
+                  "filters": ""
+                },
+                "version": "1.0.0",
+                "connector": "docker",
+                "operation": "prune_volumes",
+                "operationTitle": "Prune Volumes"
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "5ee1d1d0-4d87-49e0-8b7a-0e30a1726003"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "fff111ca-c07b-4d46-9a95-21a116be4d88"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Prune Volumes",
+              "targetStep": "/api/3/workflow_steps/5ee1d1d0-4d87-49e0-8b7a-0e30a1726003",
+              "sourceStep": "/api/3/workflow_steps/fff111ca-c07b-4d46-9a95-21a116be4d88",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "57af994e-ab96-4db7-8b7f-4392df18c61f"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "playbookOrigin": "/api/3/picklists/15c1e8c9-22bf-4e66-8fbb-0a502d4a4a3f",
+          "isEditable": true,
+          "uuid": "fa1f9bf3-8e4d-46a7-b573-95bf2a9e0593",
+          "id": 4618,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "docker",
+            "Docker"
+          ]
+        }
+      ]
+    }
+  ],
+  "exported_tags": [
+    "docker",
+    "Docker"
+  ]
+}

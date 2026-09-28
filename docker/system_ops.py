@@ -1,6 +1,14 @@
+"""
+Copyright start
+MIT License
+Copyright (c) 2026 Fortinet Inc
+Copyright end
+"""
+
+import json
 from connectors.core.connector import get_logger, ConnectorError
-from .utils import invoke_rest_endpoint, validate_required_params, validate_json_param
-from .constants import LOGGER_NAME
+from .utils import invoke_rest_endpoint
+from .constants import *
 
 logger = get_logger(LOGGER_NAME)
 
@@ -15,29 +23,33 @@ def get_info(config, params, *args, **kwargs):
 
 
 def system_df(config, params, *args, **kwargs):
-    return invoke_rest_endpoint(config, '/system/df', 'GET')
+    query_params = {
+        'type': SYSTEM_TYPE.get(params.get('type')) if params.get('type') else "",
+        'verbose': params.get('verbose')
+    }
+    return invoke_rest_endpoint(config, '/system/df', 'GET', query_params=query_params)
 
 
 def system_events(config, params, *args, **kwargs):
     """Get system events snapshot with optional filtering"""
-    filters = validate_json_param(params.get('filters'), 'filters', 'system_events')
+    filters = params.get('filters')
     since = params.get('since')
     until = params.get('until')
-    query_params = {}
+    if 'T' in str(until):
+        until = convert_timestamp(until)
+    if 'T' in str(since):
+        since = convert_timestamp(since)
     if filters:
-        query_params['filters'] = filters
-    if since:
-        query_params['since'] = since
-    if until:
-        query_params['until'] = until
-    return invoke_rest_endpoint(config, '/events', 'GET', query_params=query_params if query_params else None)
-
-
-def system_prune(config, params, *args, **kwargs):
-    """Remove unused data (containers, networks, images, and build cache)"""
-    filters = validate_json_param(params.get('filters'), 'filters', 'system_prune')
-    query_params = {'filters': filters} if filters else None
-    return invoke_rest_endpoint(config, '/system/prune', 'POST', query_params=query_params)
+        filters = json.dumps(filters.get('filters'))
+    query_params = {
+        'filters': filters,
+        'since': since,
+        'until': until
+    }
+    response = invoke_rest_endpoint(config, '/events', 'GET', query_params=query_params)
+    result = response.get("result", "")
+    events = [json.loads(line) for line in result.splitlines() if line.strip()]
+    return events
 
 
 def ping(config, params, *args, **kwargs):
@@ -48,17 +60,14 @@ def ping(config, params, *args, **kwargs):
 
 def auth(config, params, *args, **kwargs):
     """Authenticate with a registry"""
-    validate_required_params(params, ['username', 'password'], 'auth')
     username = params.get('username')
     password = params.get('password')
     serveraddress = params.get('serveraddress', 'https://index.docker.io/v1/')
-    
+
     auth_data = {
         'username': username,
         'password': password,
         'serveraddress': serveraddress
     }
-    
+
     return invoke_rest_endpoint(config, '/auth', 'POST', data=auth_data)
-
-

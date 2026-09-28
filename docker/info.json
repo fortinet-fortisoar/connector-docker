@@ -1,0 +1,3711 @@
+{
+  "name": "docker",
+  "version": "1.0.0",
+  "label": "Docker",
+  "description": "Docker is a platform for developing, deploying, and managing applications using containers. This connector enables you to manage Docker containers, images, networks, and volumes, as well as retrieve system information and monitor Docker resources.",
+  "publisher": "Fortinet",
+  "contributor": "Michael Ibe",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "help_online":"",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "category": "Container Services",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Authentication Type",
+        "description": "Specifies the authentication method used by the connector to establish a connection with the Docker Engine API.",
+        "tooltip": "Select the authentication method supported by the Docker Engine server. Currently, certificate-based authentication is supported for secure TLS connections.",
+        "type": "select",
+        "name": "authentication_type",
+        "required": true,
+        "visible": true,
+        "editable": true,
+        "options": [
+          "Certificate"
+        ],
+        "value": "Certificate",
+        "onchange": {
+          "Certificate": [
+            {
+              "title": "Protocol",
+              "type": "select",
+              "name": "protocol",
+              "required": true,
+              "visible": true,
+              "editable": true,
+              "options": [
+                "HTTP",
+                "HTTPS"
+              ],
+              "value": "HTTPS",
+              "description": "Specifies the network protocol used to communicate with the Docker Engine API.",
+              "tooltip": "Select HTTPS for secure TLS-encrypted communication. Use HTTP only when the Docker Engine API is configured without TLS and communication occurs within a trusted network."
+            },
+            {
+              "title": "Server Address",
+              "type": "text",
+              "name": "server_address",
+              "required": true,
+              "visible": true,
+              "editable": true,
+              "description": "Specifies the hostname or IP address of the server running the Docker Engine API.",
+              "tooltip": "Enter the fully qualified hostname or IP address of the Docker Engine server, such as docker.example.com or 192.168.1.100. Do not include the protocol or port in this field."
+            },
+            {
+              "title": "Port",
+              "type": "text",
+              "name": "port",
+              "required": true,
+              "visible": true,
+              "editable": true,
+              "value": "2376",
+              "description": "Specifies the TCP port on which the Docker Engine API accepts incoming connections.",
+              "tooltip": "Enter the Docker Engine API port. The standard ports are 2375 for HTTP and 2376 for HTTPS/TLS. Ensure that the selected port is accessible from the FortiSOAR server."
+            },
+            {
+              "title": "Certificate Path",
+              "type": "file",
+              "name": "cert_path",
+              "required": true,
+              "visible": true,
+              "editable": true,
+              "description": "Specifies the absolute file path to the client certificate used to authenticate the connector with the Docker Engine API over TLS.",
+              "tooltip": "Enter the absolute path to the client certificate in PEM format. The certificate must correspond to the private key specified in Key Path."
+            },
+            {
+              "title": "Key Path",
+              "type": "file",
+              "name": "key_path",
+              "required": true,
+              "visible": true,
+              "editable": true,
+              "description": "Specifies the absolute file path to the private key associated with the client certificate used for TLS authentication.",
+              "tooltip": "Enter the absolute path to the client private key in PEM format. Ensure that the key corresponds to the certificate specified in Certificate Path and is readable by the FortiSOAR integration process."
+            },
+            {
+              "title": "CA Certificate Path",
+              "type": "file",
+              "name": "ca_cert_path",
+              "required": true,
+              "visible": true,
+              "editable": true,
+              "description": "Specifies the absolute file path to the Certificate Authority (CA) certificate used to validate the Docker Engine server's TLS certificate.",
+              "tooltip": "Enter the absolute path to the CA certificate in PEM format. The CA certificate must be able to validate the server certificate presented by the Docker Engine."
+            }
+          ]
+        }
+      },
+      {
+        "title": "API Version",
+        "type": "text",
+        "name": "api_version",
+        "required": true,
+        "visible": true,
+        "editable": true,
+        "value": "v1.55",
+        "placeholder": "e.g v1.55",
+        "description": "Specifies the Docker Engine API version that the connector uses when sending requests to the Docker server.",
+        "tooltip": "Enter the API version supported by the target Docker Engine, such as v1.55. Using a compatible API version ensures that the connector can access the required Docker API endpoints and features."
+      },
+      {
+        "title": "Registry Server",
+        "type": "text",
+        "name": "registry_server",
+        "required": false,
+        "visible": true,
+        "editable": true,
+        "description": "Specifies the URL of the container registry used for Docker image-related operations such as pulling and pushing images.",
+        "tooltip": "Enter the registry server URL. For Docker Hub, the default value is https://index.docker.io/v1/. For a private registry, provide the URL of the applicable registry server."
+      },
+      {
+        "title": "Registry Username",
+        "type": "text",
+        "name": "registry_username",
+        "required": false,
+        "visible": true,
+        "editable": true,
+        "description": "Specifies the username used to authenticate with the configured Docker container registry when performing authenticated image operations.",
+        "tooltip": "Enter the username of the Docker registry account. Leave this field empty if registry authentication is not required."
+      },
+      {
+        "title": "Registry Password",
+        "type": "password",
+        "name": "registry_password",
+        "required": false,
+        "visible": true,
+        "editable": true,
+        "description": "Specifies the password or access token used together with the registry username to authenticate with the configured Docker container registry.",
+        "tooltip": "Enter the registry account password or access token. For registries that support access tokens, using a token instead of a password is recommended. Leave this field empty if registry authentication is not required."
+      },
+      {
+        "title": "Request Timeout",
+        "type": "integer",
+        "name": "timeout",
+        "required": false,
+        "visible": true,
+        "editable": true,
+        "value": 60,
+        "description": "Specifies the maximum amount of time, in seconds, that the connector waits for a Docker Engine API request to complete before the request is considered timed out.",
+        "tooltip": "Enter the request timeout in seconds. Increase the value for operations that may take longer to complete, such as image builds, image pulls, or large data transfers."
+      },
+      {
+        "title": "Rate Limit",
+        "type": "integer",
+        "name": "rate_limit",
+        "required": false,
+        "visible": true,
+        "editable": true,
+        "value": 60,
+        "description": "Specifies the maximum number of requests that the connector can send to the Docker Engine API within one minute.",
+        "tooltip": "Enter the maximum number of API requests allowed per minute. Configure this value according to the capacity of the Docker server and the expected connector workload to prevent excessive API traffic."
+      },
+      {
+        "title": "Retry Attempts",
+        "type": "integer",
+        "name": "retry_attempts",
+        "required": false,
+        "visible": true,
+        "editable": true,
+        "value": 3,
+        "description": "Specifies the number of additional attempts the connector makes when a Docker Engine API request fails due to a retryable error.",
+        "tooltip": "Enter the number of times the connector should retry a failed request before returning the error. A higher value can improve reliability for temporary network or service failures but may increase the total request duration."
+      },
+      {
+        "title": "Retry Delay",
+        "type": "integer",
+        "name": "retry_delay",
+        "required": false,
+        "visible": true,
+        "editable": true,
+        "value": 1,
+        "description": "Specifies the amount of time, in seconds, that the connector waits between consecutive retry attempts for a failed API request.",
+        "tooltip": "Enter the delay between retry attempts. Increasing the delay can help when the Docker server or network requires additional time to recover from a temporary failure."
+      },
+      {
+        "title": "Verify SSL",
+        "type": "checkbox",
+        "name": "verify_ssl",
+        "required": false,
+        "visible": true,
+        "editable": true,
+        "value": false,
+        "description": "Specifies whether the connector validates the Docker Engine server's TLS/SSL certificate when establishing an HTTPS connection.",
+        "tooltip": "Enable this option to validate the server certificate against the configured CA certificate. Disable it only when certificate verification is intentionally not required, such as when using a self-signed certificate in a trusted environment."
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "ping",
+      "title": "Ping",
+      "description": "Checks the connectivity and availability of the Docker daemon.",
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "ping",
+      "parameters": [],
+      "output_schema": {
+        "response": "",
+        "status_code": ""
+      }
+    },
+    {
+      "title": "Get Version",
+      "operation": "get_version",
+      "description": "Retrieves version and system information for the Docker environment, including Docker version, API compatibility, operating system, architecture, kernel, build details, and installed components.",
+      "category": "investigation",
+      "annotation": "get_version",
+      "parameters": [],
+      "output_schema": {
+        "Os": "",
+        "Arch": "",
+        "Version": "",
+        "Platform": {
+          "Name": ""
+        },
+        "BuildTime": "",
+        "GitCommit": "",
+        "GoVersion": "",
+        "ApiVersion": "",
+        "Components": [
+          {
+            "Name": "",
+            "Details": {
+              "Os": "",
+              "Arch": "",
+              "Module": "",
+              "BuildTime": "",
+              "GitCommit": "",
+              "GoVersion": "",
+              "ApiVersion": "",
+              "Experimental": "",
+              "KernelVersion": "",
+              "MinAPIVersion": "",
+              "ModuleVersion": ""
+            },
+            "Version": ""
+          }
+        ],
+        "KernelVersion": "",
+        "MinAPIVersion": ""
+      },
+      "enabled": true
+    },
+    {
+      "title": "Get System Information",
+      "operation": "get_info",
+      "description": "Retrieves detailed information about the Docker environment, including containers, images, storage and logging drivers, runtime configuration, system resources, operating system, kernel, networking, security options, registry configuration, and Docker services.",
+      "category": "investigation",
+      "annotation": "get_info",
+      "parameters": [],
+      "output_schema": {
+        "ID": "",
+        "NFd": "",
+        "NCPU": "",
+        "Name": "",
+        "Debug": "",
+        "Swarm": {
+          "Error": "",
+          "NodeID": "",
+          "NodeAddr": "",
+          "LocalNodeState": "",
+          "RemoteManagers": "",
+          "ControlAvailable": ""
+        },
+        "CPUSet": "",
+        "Driver": "",
+        "Images": "",
+        "Labels": [],
+        "OSType": "",
+        "NoProxy": "",
+        "Plugins": {
+          "Log": [],
+          "Volume": [],
+          "Network": [],
+          "Authorization": ""
+        },
+        "MemTotal": "",
+        "Runtimes": {
+          "runc": {
+            "path": "",
+            "status": {
+              "org.opencontainers.runtime-spec.features": ""
+            }
+          },
+          "io.containerd.runc.v2": {
+            "path": "",
+            "status": {
+              "org.opencontainers.runtime-spec.features": ""
+            }
+          }
+        },
+        "Warnings": "",
+        "CPUShares": "",
+        "HttpProxy": "",
+        "Isolation": "",
+        "OSVersion": "",
+        "PidsLimit": "",
+        "SwapLimit": "",
+        "Containerd": {
+          "Address": "",
+          "Namespaces": {
+            "Plugins": "",
+            "Containers": ""
+          }
+        },
+        "Containers": "",
+        "HttpsProxy": "",
+        "InitBinary": "",
+        "InitCommit": {
+          "ID": ""
+        },
+        "RuncCommit": {
+          "ID": ""
+        },
+        "SystemTime": "",
+        "CDISpecDirs": [],
+        "CpuCfsQuota": "",
+        "MemoryLimit": "",
+        "NGoroutines": "",
+        "Architecture": "",
+        "CgroupDriver": "",
+        "CpuCfsPeriod": "",
+        "DriverStatus": [
+        ],
+        "CgroupVersion": "",
+        "DockerRootDir": "",
+        "KernelVersion": "",
+        "LoggingDriver": "",
+        "ServerVersion": "",
+        "DefaultRuntime": "",
+        "IPv4Forwarding": "",
+        "OomKillDisable": "",
+        "RegistryConfig": {
+          "Mirrors": [],
+          "IndexConfigs": {
+            "docker.io": {
+              "Name": "",
+              "Secure": "",
+              "Mirrors": [],
+              "Official": ""
+            }
+          },
+          "InsecureRegistryCIDRs": []
+        },
+        "FirewallBackend": {
+          "Info": [],
+          "Driver": ""
+        },
+        "NEventsListener": "",
+        "OperatingSystem": "",
+        "SecurityOptions": [],
+        "ContainerdCommit": {
+          "ID": ""
+        },
+        "ContainersPaused": "",
+        "GenericResources": "",
+        "ContainersRunning": "",
+        "ContainersStopped": "",
+        "ExperimentalBuild": "",
+        "IndexServerAddress": "",
+        "LiveRestoreEnabled": ""
+      },
+      "enabled": true
+    },
+    {
+      "title": "System Disk Usage",
+      "operation": "system_df",
+      "description": "Retrieves disk space usage information for Docker containers, images, volumes, and build cache.",
+      "category": "investigation",
+      "annotation": "system_df",
+      "parameters": [
+        {
+          "title": "Type",
+          "type": "select",
+          "name": "type",
+          "description": "Specifies the Docker resource types for which disk usage information is retrieved.",
+          "tooltip": "Select the Docker resource type for which disk usage information should be retrieved. Leave this blank to retrieve information for all supported resource types.",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "options": [
+            "Container",
+            "Image",
+            "Volume",
+            "Build Cache"
+          ]
+        },
+        {
+          "title": "Verbose",
+          "type": "checkbox",
+          "name": "verbose",
+          "description": "Specifies whether to include detailed disk usage information for the selected Docker resources.",
+          "tooltip": "Enable this option to include detailed information about disk space usage for the selected resource types.",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        }
+      ],
+      "output_schema": {
+        "Images": [
+          {
+            "Id": "",
+            "Size": "",
+            "Labels": {
+              "git_commit": "",
+              "org.opencontainers.image.url": "",
+              "org.opencontainers.image.title": "",
+              "org.opencontainers.image.vendor": "",
+              "com.docker.extension.screenshots": "",
+              "org.opencontainers.image.created": "",
+              "com.docker.desktop.extension.icon": "",
+              "org.opencontainers.image.revision": "",
+              "com.docker.extension.publisher-url": "",
+              "com.docker.extension.additional-urls": "",
+              "org.opencontainers.image.documentation": "",
+              "com.docker.desktop.extension.api.version": "",
+              "com.docker.extension.detailed-description": ""
+            },
+            "Created": "",
+            "ParentId": "",
+            "RepoTags": [],
+            "Containers": "",
+            "Descriptor": {
+              "size": "",
+              "digest": "",
+              "mediaType": ""
+            },
+            "SharedSize": "",
+            "RepoDigests": []
+          }
+        ],
+        "Volumes": [
+          {
+            "Name": "",
+            "Scope": "",
+            "Driver": "",
+            "Labels": "",
+            "Options": "",
+            "CreatedAt": "",
+            "UsageData": {
+              "Size": "",
+              "RefCount": ""
+            },
+            "Mountpoint": ""
+          }
+        ],
+        "BuildCache": [],
+        "Containers": [
+          {
+            "Id": "",
+            "Image": "",
+            "Names": [],
+            "Ports": [
+              {
+                "IP": "",
+                "Type": "",
+                "PublicPort": "",
+                "PrivatePort": ""
+              }
+            ],
+            "State": "",
+            "Health": {
+              "Status": "",
+              "FailingStreak": ""
+            },
+            "Labels": {
+              "git_commit": "",
+              "org.opencontainers.image.url": "",
+              "org.opencontainers.image.title": "",
+              "org.opencontainers.image.vendor": "",
+              "com.docker.extension.screenshots": "",
+              "org.opencontainers.image.created": "",
+              "com.docker.desktop.extension.icon": "",
+              "org.opencontainers.image.revision": "",
+              "com.docker.extension.publisher-url": "",
+              "com.docker.extension.additional-urls": "",
+              "org.opencontainers.image.description": "",
+              "org.opencontainers.image.documentation": "",
+              "com.docker.desktop.extension.api.version": "",
+              "com.docker.extension.detailed-description": ""
+            },
+            "Mounts": [
+              {
+                "RW": "",
+                "Mode": "",
+                "Name": "",
+                "Type": "",
+                "Driver": "",
+                "Source": "",
+                "Destination": "",
+                "Propagation": ""
+              }
+            ],
+            "Status": "",
+            "Command": "",
+            "Created": "",
+            "ImageID": "",
+            "HostConfig": {
+              "NetworkMode": ""
+            },
+            "SizeRootFs": "",
+            "NetworkSettings": {
+              "Networks": {
+                "bridge": {
+                  "Links": "",
+                  "Aliases": "",
+                  "Gateway": "",
+                  "DNSNames": "",
+                  "IPAddress": "",
+                  "NetworkID": "",
+                  "DriverOpts": "",
+                  "EndpointID": "",
+                  "GwPriority": "",
+                  "IPAMConfig": "",
+                  "MacAddress": "",
+                  "IPPrefixLen": "",
+                  "IPv6Gateway": "",
+                  "GlobalIPv6Address": "",
+                  "GlobalIPv6PrefixLen": ""
+                }
+              }
+            }
+          }
+        ],
+        "ImageUsage": {
+          "Items": [
+            {
+              "Id": "",
+              "Size": "",
+              "Labels": {
+                "git_commit": "",
+                "org.opencontainers.image.url": "",
+                "org.opencontainers.image.title": "",
+                "org.opencontainers.image.vendor": "",
+                "com.docker.extension.screenshots": "",
+                "org.opencontainers.image.created": "",
+                "com.docker.desktop.extension.icon": "",
+                "org.opencontainers.image.revision": "",
+                "com.docker.extension.publisher-url": "",
+                "com.docker.extension.additional-urls": "",
+                "org.opencontainers.image.description": "",
+                "org.opencontainers.image.documentation": "",
+                "com.docker.desktop.extension.api.version": "",
+                "com.docker.extension.detailed-description": ""
+              },
+              "Created": "",
+              "ParentId": "",
+              "RepoTags": [
+              ],
+              "Containers": "",
+              "Descriptor": {
+                "size": "",
+                "digest": "",
+                "mediaType": ""
+              },
+              "SharedSize": "",
+              "RepoDigests": [
+              ]
+            }
+          ],
+          "TotalSize": "",
+          "TotalCount": "",
+          "ActiveCount": ""
+        },
+        "LayersSize": "",
+        "VolumeUsage": {
+          "Items": [
+            {
+              "Name": "",
+              "Scope": "",
+              "Driver": "",
+              "Labels": "",
+              "Options": "",
+              "CreatedAt": "",
+              "UsageData": {
+                "Size": "",
+                "RefCount": ""
+              },
+              "Mountpoint": ""
+            }
+          ],
+          "TotalSize": "",
+          "TotalCount": "",
+          "ActiveCount": ""
+        },
+        "ContainerUsage": {
+          "Items": [
+            {
+              "Id": "",
+              "Image": "",
+              "Names": [],
+              "Ports": [
+                {
+                  "IP": "",
+                  "Type": "",
+                  "PublicPort": "",
+                  "PrivatePort": ""
+                }
+              ],
+              "State": "",
+              "Health": {
+                "Status": "",
+                "FailingStreak": ""
+              },
+              "Labels": {
+                "git_commit": "",
+                "org.opencontainers.image.url": "",
+                "org.opencontainers.image.title": "",
+                "org.opencontainers.image.vendor": "",
+                "com.docker.extension.screenshots": "",
+                "org.opencontainers.image.created": "",
+                "com.docker.desktop.extension.icon": "",
+                "org.opencontainers.image.revision": "",
+                "com.docker.extension.publisher-url": "",
+                "com.docker.extension.additional-urls": "",
+                "org.opencontainers.image.description": "",
+                "org.opencontainers.image.documentation": "",
+                "com.docker.desktop.extension.api.version": "",
+                "com.docker.extension.detailed-description": ""
+              },
+              "Mounts": [
+                {
+                  "RW": "",
+                  "Mode": "",
+                  "Name": "",
+                  "Type": "",
+                  "Driver": "",
+                  "Source": "",
+                  "Destination": "",
+                  "Propagation": ""
+                }
+              ],
+              "Status": "",
+              "Command": "",
+              "Created": "",
+              "ImageID": "",
+              "HostConfig": {
+                "NetworkMode": ""
+              },
+              "SizeRootFs": "",
+              "NetworkSettings": {
+                "Networks": {
+                  "bridge": {
+                    "Links": "",
+                    "Aliases": "",
+                    "Gateway": "",
+                    "DNSNames": "",
+                    "IPAddress": "",
+                    "NetworkID": "",
+                    "DriverOpts": "",
+                    "EndpointID": "",
+                    "GwPriority": "",
+                    "IPAMConfig": "",
+                    "MacAddress": "",
+                    "IPPrefixLen": "",
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": ""
+                  }
+                }
+              }
+            }
+          ],
+          "TotalCount": "",
+          "ActiveCount": ""
+        },
+        "BuildCacheUsage": {}
+      },
+      "enabled": true
+    },
+    {
+      "operation": "system_events",
+      "title": "System Events",
+      "description": "Streams real-time events from the Docker environment, including events related to containers, images, networks, volumes, and other Docker resources.",
+      "category": "investigation",
+      "annotation": "system_events",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Filters",
+          "description": "Specifies event filters in JSON format to return only events matching the selected criteria, such as resource type, action, or resource identifier. For reference, see: https://docs.docker.com/reference/api/engine/version/v1.55/#tag/System/operation/SystemEvents.",
+          "tooltip": "Enter JSON-formatted filters to limit events based on criteria such as resource type, action, or resource identifier.",
+          "type": "json",
+          "name": "filters",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Since",
+          "description": "Specifies the timestamp from which events should be retrieved. Events occurring from this time onward are returned, including new events as they occur.",
+          "tooltip": "Enter the starting date and time for retrieving events. New matching events are streamed after the specified time.",
+          "type": "datetime",
+          "name": "since",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Until",
+          "description": "Specifies the timestamp until which events should be retrieved. Event streaming stops after this time is reached.",
+          "tooltip": "Enter the ending date and time for retrieving events. Streaming stops after the specified time.",
+          "type": "datetime",
+          "name": "until",
+          "required": false,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": [
+        {
+          "Type": "",
+          "time": "",
+          "Actor": {
+            "ID": "",
+            "Attributes": {
+              "name": "",
+              "image": "",
+              "git_commit": "",
+              "org.opencontainers.image.url": "",
+              "org.opencontainers.image.title": "",
+              "org.opencontainers.image.vendor": "",
+              "com.docker.extension.screenshots": "",
+              "org.opencontainers.image.created": "",
+              "com.docker.desktop.extension.icon": "",
+              "org.opencontainers.image.revision": "",
+              "com.docker.extension.publisher-url": "",
+              "com.docker.extension.additional-urls": "",
+              "org.opencontainers.image.description": "",
+              "org.opencontainers.image.documentation": "",
+              "com.docker.desktop.extension.api.version": "",
+              "com.docker.extension.detailed-description": ""
+            }
+          },
+          "scope": "",
+          "Action": "",
+          "timeNano": ""
+        }
+      ]
+    },
+    {
+      "operation": "create_container",
+      "title": "Create Container",
+      "description": "Creates a new Docker container using the specified image and configuration.",
+      "category": "investigation",
+      "annotation": "create_container",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Container Name",
+          "tooltip": "Specifies the name to assign to the new container.",
+          "description": "Specifies the name to assign to the container. The name must contain only letters, numbers, underscores, periods, and hyphens, and must begin with a letter or number. Must match /?[a-zA-Z0-9][a-zA-Z0-9_.-]+.",
+          "type": "text",
+          "name": "name",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Image",
+          "tooltip": "Specifies the Docker image to use for creating the container, including an optional tag or digest.",
+          "description": "Specifies the Docker image to use for creating the container. The image can include a tag or digest to identify a specific image version.",
+          "type": "text",
+          "name": "image",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "placeholder": "e.g. nginx:latest, redis:latest, etc"
+        },
+        {
+          "title": "Platform",
+          "tooltip": "Specifies the target operating system and architecture for the container image, such as linux/amd64 or linux/arm64.",
+          "description": "Specifies the target platform for the container image, such as the operating system and architecture.",
+          "type": "text",
+          "name": "platform",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "placeholder": "e.g. linux, ubuntu, etc"
+        },
+        {
+          "title": "Host Name",
+          "tooltip": "Specifies the hostname assigned to the container.",
+          "description": "Specifies the hostname assigned to the container. The hostname should be a valid RFC 1123 hostname.",
+          "type": "text",
+          "name": "Hostname",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Domain Name",
+          "tooltip": "Specifies the domain name assigned to the container.",
+          "description": "Specifies the domain name assigned to the container.",
+          "type": "text",
+          "name": "domain_name",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Command",
+          "tooltip": "Specifies the command to execute when the container starts.",
+          "description": "Specifies the command to run when the container starts. The command can be provided as a string or as an array of command arguments.",
+          "type": "text",
+          "name": "Cmd",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Host Configuration",
+          "tooltip": "Specifies host-level container settings in JSON format, such as resources, ports, volumes, networking, and restart policies.",
+          "description": "Specifies host-level configuration for the container in JSON format, such as resource limits, port bindings, volume mounts, networking, restart policies, and other host settings.",
+          "type": "json",
+          "name": "HostConfig",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Additional Fields",
+          "name": "additional_fields",
+          "type": "json",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Specify additional container configuration fields in JSON format that are not available through the other parameters.",
+          "description": "Specify additional container configuration fields in JSON format that are not available through the other parameters."
+        }
+      ],
+      "output_schema": {
+        "Id": "",
+        "Warnings": []
+      }
+    },
+    {
+      "operation": "list_containers",
+      "title": "List Containers",
+      "description": "Retrieves a list of Docker containers and their configuration, status, networking, storage, and image information.",
+      "category": "investigation",
+      "annotation": "list_containers",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "All",
+          "tooltip": "Enable to include all containers, including stopped and exited containers. By default, only running containers are returned.",
+          "description": "Specifies whether to include all containers, including stopped, created, and exited containers. When disabled, only running containers are returned.",
+          "type": "checkbox",
+          "name": "all",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Filters",
+          "tooltip": "Enter JSON-formatted filters to return only containers matching the specified criteria.",
+          "description": "Specifies filters in JSON format to limit the containers returned based on criteria such as status, name, ID, image, label, or other supported container attributes. For example, {\"status\": [\"paused\"]} will only return paused containers. For reference, see: https://docs.docker.com/reference/api/engine/version/v1.55/#tag/Container/operation/ContainerList.",
+          "type": "json",
+          "name": "filters",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Limit",
+          "tooltip": "Specifies the maximum number of containers to return, starting with the most recently created containers.",
+          "description": "Specifies the maximum number of containers to return, starting with the most recently created containers.",
+          "type": "integer",
+          "name": "limit",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Size",
+          "tooltip": "Enable to include disk usage information for each container.",
+          "description": "Specifies whether to include the container's disk usage information, including the writable layer size and total root filesystem size.",
+          "type": "checkbox",
+          "name": "size",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        }
+      ],
+      "output_schema": [
+        {
+          "Id": "",
+          "Image": "",
+          "Names": [],
+          "Ports": [],
+          "State": "",
+          "Health": {
+            "Status": "",
+            "FailingStreak": ""
+          },
+          "Labels": {
+            "git_commit": "",
+            "org.opencontainers.image.url": "",
+            "org.opencontainers.image.title": "",
+            "org.opencontainers.image.vendor": "",
+            "com.docker.extension.screenshots": "",
+            "org.opencontainers.image.created": "",
+            "com.docker.desktop.extension.icon": "",
+            "org.opencontainers.image.revision": "",
+            "com.docker.extension.publisher-url": "",
+            "com.docker.extension.additional-urls": "",
+            "org.opencontainers.image.description": "",
+            "org.opencontainers.image.documentation": "",
+            "com.docker.desktop.extension.api.version": "",
+            "com.docker.extension.detailed-description": ""
+          },
+          "Mounts": [
+            {
+              "RW": "",
+              "Mode": "",
+              "Name": "",
+              "Type": "",
+              "Driver": "",
+              "Source": "",
+              "Destination": "",
+              "Propagation": ""
+            }
+          ],
+          "Status": "",
+          "Command": "",
+          "Created": "",
+          "ImageID": "",
+          "HostConfig": {
+            "NetworkMode": ""
+          },
+          "NetworkSettings": {
+            "Networks": {
+              "bridge": {
+                "Links": "",
+                "Aliases": "",
+                "Gateway": "",
+                "DNSNames": "",
+                "IPAddress": "",
+                "NetworkID": "",
+                "DriverOpts": "",
+                "EndpointID": "",
+                "GwPriority": "",
+                "IPAMConfig": "",
+                "MacAddress": "",
+                "IPPrefixLen": "",
+                "IPv6Gateway": "",
+                "GlobalIPv6Address": "",
+                "GlobalIPv6PrefixLen": ""
+              }
+            }
+          },
+          "ImageManifestDescriptor": {
+            "size": "",
+            "digest": "",
+            "platform": {
+              "os": "",
+              "architecture": ""
+            },
+            "mediaType": ""
+          }
+        }
+      ]
+    },
+    {
+      "operation": "inspect_container",
+      "title": "Inspect Container",
+      "description": "Retrieves detailed information about a Docker container, including its configuration, current state, networking, storage, mounts, resource settings, and runtime details.",
+      "category": "investigation",
+      "annotation": "inspect_container",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Container ID or Name",
+          "tooltip": "Enter the ID or name of the Docker container to inspect.",
+          "description": "Specifies the ID or name of the container to inspect.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Size",
+          "tooltip": "Enable to include disk usage information for the container, including its writable layer and root filesystem size.",
+          "description": "Specifies whether to include the container's disk usage information, including the size of its writable layer and root filesystem.",
+          "type": "checkbox",
+          "name": "size",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        }
+      ],
+      "output_schema": {
+        "Id": "",
+        "Args": [],
+        "Name": "",
+        "Path": "",
+        "Image": "",
+        "State": {
+          "Pid": "",
+          "Dead": "",
+          "Error": "",
+          "Paused": "",
+          "Status": "",
+          "Running": "",
+          "ExitCode": "",
+          "OOMKilled": "",
+          "StartedAt": "",
+          "FinishedAt": "",
+          "Restarting": ""
+        },
+        "Config": {
+          "Cmd": [],
+          "Env": [],
+          "Tty": "",
+          "User": "",
+          "Image": "",
+          "Labels": {
+            "git_commit": "",
+            "org.opencontainers.image.url": "",
+            "org.opencontainers.image.title": "",
+            "org.opencontainers.image.vendor": "",
+            "com.docker.extension.screenshots": "",
+            "org.opencontainers.image.created": "",
+            "com.docker.desktop.extension.icon": "",
+            "org.opencontainers.image.revision": "",
+            "com.docker.extension.publisher-url": "",
+            "com.docker.extension.additional-urls": "",
+            "org.opencontainers.image.description": "",
+            "org.opencontainers.image.documentation": "",
+            "com.docker.desktop.extension.api.version": "",
+            "com.docker.extension.detailed-description": ""
+          },
+          "Volumes": {
+            "/data": {}
+          },
+          "Hostname": "",
+          "OpenStdin": "",
+          "StdinOnce": "",
+          "Domainname": "",
+          "Entrypoint": [],
+          "WorkingDir": "",
+          "AttachStdin": "",
+          "AttachStderr": "",
+          "AttachStdout": "",
+          "ExposedPorts": {
+            "8000/tcp": {},
+            "9000/tcp": {},
+            "9443/tcp": {}
+          }
+        },
+        "Driver": "",
+        "Mounts": [
+          {
+            "RW": "",
+            "Mode": "",
+            "Name": "",
+            "Type": "",
+            "Driver": "",
+            "Source": "",
+            "Destination": "",
+            "Propagation": ""
+          }
+        ],
+        "Created": "",
+        "ExecIDs": "",
+        "LogPath": "",
+        "Storage": {
+          "RootFS": {
+            "Snapshot": {
+              "Name": ""
+            }
+          }
+        },
+        "Platform": "",
+        "HostsPath": "",
+        "HostConfig": {
+          "Dns": "",
+          "Binds": "",
+          "Links": "",
+          "CapAdd": "",
+          "Cgroup": "",
+          "Memory": "",
+          "CapDrop": "",
+          "Devices": "",
+          "IpcMode": "",
+          "PidMode": "",
+          "Runtime": "",
+          "ShmSize": "",
+          "UTSMode": "",
+          "Ulimits": "",
+          "CpuCount": "",
+          "CpuQuota": "",
+          "GroupAdd": "",
+          "NanoCpus": "",
+          "CpuPeriod": "",
+          "CpuShares": "",
+          "DnsSearch": "",
+          "Isolation": "",
+          "LogConfig": {
+            "Type": "",
+            "Config": {}
+          },
+          "PidsLimit": "",
+          "AutoRemove": "",
+          "CpuPercent": "",
+          "CpusetCpus": "",
+          "CpusetMems": "",
+          "DnsOptions": "",
+          "ExtraHosts": "",
+          "MemorySwap": "",
+          "Privileged": "",
+          "UsernsMode": "",
+          "BlkioWeight": "",
+          "ConsoleSize": [],
+          "MaskedPaths": [],
+          "NetworkMode": "",
+          "OomScoreAdj": "",
+          "SecurityOpt": "",
+          "VolumesFrom": "",
+          "CgroupParent": "",
+          "CgroupnsMode": "",
+          "PortBindings": {},
+          "VolumeDriver": "",
+          "IOMaximumIOps": "",
+          "ReadonlyPaths": [],
+          "RestartPolicy": {
+            "Name": "",
+            "MaximumRetryCount": ""
+          },
+          "DeviceRequests": "",
+          "OomKillDisable": "",
+          "ReadonlyRootfs": "",
+          "ContainerIDFile": "",
+          "PublishAllPorts": "",
+          "MemorySwappiness": "",
+          "BlkioWeightDevice": "",
+          "CpuRealtimePeriod": "",
+          "DeviceCgroupRules": "",
+          "MemoryReservation": "",
+          "BlkioDeviceReadBps": "",
+          "CpuRealtimeRuntime": "",
+          "IOMaximumBandwidth": "",
+          "BlkioDeviceReadIOps": "",
+          "BlkioDeviceWriteBps": "",
+          "BlkioDeviceWriteIOps": ""
+        },
+        "MountLabel": "",
+        "HostnamePath": "",
+        "ProcessLabel": "",
+        "RestartCount": "",
+        "ResolvConfPath": "",
+        "AppArmorProfile": "",
+        "NetworkSettings": {
+          "Ports": {},
+          "Networks": {
+            "bridge": {
+              "Links": "",
+              "Aliases": "",
+              "Gateway": "",
+              "DNSNames": "",
+              "IPAddress": "",
+              "NetworkID": "",
+              "DriverOpts": "",
+              "EndpointID": "",
+              "GwPriority": "",
+              "IPAMConfig": "",
+              "MacAddress": "",
+              "IPPrefixLen": "",
+              "IPv6Gateway": "",
+              "GlobalIPv6Address": "",
+              "GlobalIPv6PrefixLen": ""
+            }
+          },
+          "SandboxID": "",
+          "SandboxKey": ""
+        },
+        "ImageManifestDescriptor": {
+          "size": "",
+          "digest": "",
+          "platform": {
+            "os": "",
+            "architecture": ""
+          },
+          "mediaType": ""
+        }
+      }
+    },
+    {
+      "operation": "container_logs",
+      "title": "Container Logs",
+      "description": "Retrieves logs generated by a Docker container, with options to filter the output by time, stream, number of lines, and timestamps.",
+      "category": "investigation",
+      "annotation": "container_logs",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Container ID or Name",
+          "tooltip": "Enter the ID or name of the container from which you want to retrieve logs.",
+          "description": "Specifies the ID or name of the container from which to retrieve logs.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Follow",
+          "tooltip": "Enable to continuously receive new log entries while the container generates them.",
+          "description": "Keeps the log stream open and continuously returns new log entries as they are generated.",
+          "type": "checkbox",
+          "name": "follow",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Stdout",
+          "tooltip": "Enable to include messages written to the standard output stream.",
+          "description": "Includes log messages written to the container's standard output stream.",
+          "type": "checkbox",
+          "name": "stdout",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Stderr",
+          "tooltip": "Enable to include messages written to the standard error stream.",
+          "description": "Includes log messages written to the container's standard error stream.",
+          "type": "checkbox",
+          "name": "stderr",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Since",
+          "tooltip": "Specify the starting date and time for the logs to retrieve.",
+          "description": "Specifies the date and time from which log entries should be retrieved.",
+          "type": "datetime",
+          "name": "since",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Until",
+          "tooltip": "Specify the ending date and time for the logs to retrieve.",
+          "description": "Specifies the date and time up to which log entries should be retrieved.",
+          "type": "datetime",
+          "name": "until",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Timestamps",
+          "tooltip": "Enable to include timestamps with each returned log entry.",
+          "description": "Includes the timestamp for each log entry in the returned output.",
+          "type": "checkbox",
+          "name": "timestamps",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Tail",
+          "tooltip": "Specify the number of log lines to return from the end. Use all to return all available log lines.",
+          "description": "Specifies the number of log lines to return from the end of the log output. Use an integer to limit the number of lines or specify \"all\" to return all available log lines.",
+          "type": "text",
+          "name": "tail",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": "all"
+        }
+      ],
+      "output_schema": {
+        "result": "",
+        "status_code": ""
+      }
+    },
+    {
+      "operation": "container_stats",
+      "title": "Container Statistics",
+      "description": "Retrieves resource usage and performance statistics for a Docker container, including CPU, memory, network, process, block I/O, and storage information.",
+      "category": "investigation",
+      "annotation": "container_stats",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Container ID or Name",
+          "description": "Specifies the ID or name of the container for which statistics should be retrieved.",
+          "tooltip": "Enter the ID or name of the Docker container to retrieve its resource usage statistics.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Stream",
+          "description": "Specifies whether to continuously stream updated container statistics. When disabled, statistics are retrieved once and the connection is closed.",
+          "tooltip": "Enable to continuously receive updated statistics. Disable to retrieve statistics once.",
+          "type": "checkbox",
+          "name": "stream",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": true
+        },
+        {
+          "title": "One Shot",
+          "description": "Specifies whether to retrieve a single set of statistics without waiting for multiple collection cycles. This option must be used with Stream disabled.",
+          "tooltip": "Enable to retrieve a single set of statistics immediately. Use only when Stream is disabled.",
+          "type": "checkbox",
+          "name": "oneshot",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "name": "",
+        "os_type": "",
+        "read": "",
+        "cpu_stats": {
+          "cpu_usage": {
+            "total_usage": "",
+            "percpu_usage": [],
+            "usage_in_kernelmode": "",
+            "usage_in_usermode": ""
+          },
+          "system_cpu_usage": "",
+          "online_cpus": "",
+          "throttling_data": {
+            "periods": "",
+            "throttled_periods": "",
+            "throttled_time": ""
+          }
+        },
+        "memory_stats": {
+          "usage": "",
+          "max_usage": "",
+          "stats": {
+            "active_anon": "",
+            "active_file": "",
+            "anon": "",
+            "anon_thp": "",
+            "file": "",
+            "file_dirty": "",
+            "file_mapped": "",
+            "file_writeback": "",
+            "inactive_anon": "",
+            "inactive_file": "",
+            "kernel_stack": "",
+            "pgactivate": "",
+            "pgdeactivate": "",
+            "pgfault": "",
+            "pglazyfree": "",
+            "pglazyfreed": "",
+            "pgmajfault": "",
+            "pgrefill": "",
+            "pgscan": "",
+            "pgsteal": "",
+            "shmem": "",
+            "slab": "",
+            "slab_reclaimable": "",
+            "slab_unreclaimable": "",
+            "sock": "",
+            "thp_collapse_alloc": "",
+            "thp_fault_alloc": "",
+            "unevictable": "",
+            "workingset_activate": "",
+            "workingset_nodereclaim": "",
+            "workingset_refault": ""
+          },
+          "failcnt": "",
+          "limit": "",
+          "commitbytes": "",
+          "commitpeakbytes": "",
+          "privateworkingset": ""
+        },
+        "networks": {
+          "eth0": {
+            "rx_bytes": "",
+            "rx_dropped": "",
+            "rx_errors": "",
+            "rx_packets": "",
+            "tx_bytes": "",
+            "tx_dropped": "",
+            "tx_errors": "",
+            "tx_packets": ""
+          },
+          "eth5": {
+            "rx_bytes": "",
+            "rx_dropped": "",
+            "rx_errors": "",
+            "rx_packets": "",
+            "tx_bytes": "",
+            "tx_dropped": "",
+            "tx_errors": "",
+            "tx_packets": ""
+          }
+        },
+        "pids_stats": {
+          "current": "",
+          "limit": ""
+        },
+        "blkio_stats": {
+          "io_service_bytes_recursive": [],
+          "io_serviced_recursive": "",
+          "io_queue_recursive": "",
+          "io_service_time_recursive": "",
+          "io_wait_time_recursive": "",
+          "io_merged_recursive": "",
+          "io_time_recursive": "",
+          "sectors_recursive": ""
+        },
+        "num_procs": "",
+        "storage_stats": {
+          "read_count_normalized": "",
+          "read_size_bytes": "",
+          "write_count_normalized": "",
+          "write_size_bytes": ""
+        },
+        "preread": "",
+        "precpu_stats": {
+          "cpu_usage": {
+            "total_usage": "",
+            "percpu_usage": [],
+            "usage_in_kernelmode": "",
+            "usage_in_usermode": ""
+          },
+          "system_cpu_usage": "",
+          "online_cpus": "",
+          "throttling_data": {
+            "periods": "",
+            "throttled_periods": "",
+            "throttled_time": ""
+          }
+        }
+      }
+    },
+    {
+      "operation": "wait_container",
+      "title": "Wait Container",
+      "description": "Waits for a Docker container to reach the specified condition and returns its exit status.",
+      "category": "investigation",
+      "annotation": "wait_container",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Container ID or Name",
+          "description": "Specifies the ID or name of the container to monitor until it reaches the specified condition.",
+          "tooltip": "Enter the ID or name of the Docker container to wait for.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Condition",
+          "description": "Specifies the container state condition that must be reached before the action returns. Defaults to Not Running when no condition is specified.",
+          "tooltip": "Select the container state to wait for: Not Running, Next Exit, or Removed.",
+          "type": "select",
+          "name": "condition",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "options": [
+            "Not Running",
+            "Next Exit",
+            "Removed"
+          ],
+          "value": "Not Running"
+        }
+      ],
+      "output_schema": {
+        "StatusCode": ""
+      }
+    },
+    {
+      "operation": "rename_container",
+      "title": "Rename Container",
+      "description": "Renames an existing Docker container with the specified name.",
+      "category": "investigation",
+      "annotation": "rename_container",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Container ID or Name",
+          "description": "Specifies the ID or current name of the Docker container to rename.",
+          "tooltip": "Enter the ID or current name of the Docker container you want to rename.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "New Name",
+          "description": "Specifies the new name to assign to the Docker container.",
+          "tooltip": "Enter the new name for the Docker container.",
+          "type": "text",
+          "name": "name",
+          "required": true,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": {
+        "result": ""
+      }
+    },
+    {
+      "operation": "update_container",
+      "title": "Update Container",
+      "description": "Updates the configuration of an existing Docker container without recreating it.",
+      "category": "investigation",
+      "annotation": "update_container",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Container ID or Name",
+          "description": "Specifies the ID or name of the Docker container to update.",
+          "tooltip": "Enter the ID or name of the Docker container you want to update.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Memory",
+          "description": "Specifies the memory limit for the container in bytes. Set to 0 to remove the memory limit.",
+          "tooltip": "Enter the memory limit in bytes. Use 0 to remove the memory limit.",
+          "type": "integer",
+          "name": "Memory",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "value": 0
+        },
+        {
+          "title": "CPU Shares",
+          "description": "Specifies the relative CPU weight assigned to the container compared with other containers.",
+          "tooltip": "Enter the relative CPU weight for the container compared with other containers.",
+          "type": "integer",
+          "name": "CpuShares",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "CPU Quota",
+          "description": "Specifies the maximum amount of CPU time the container can use during each CPU period, in microseconds.",
+          "tooltip": "Enter the CPU time limit per CPU period in microseconds.",
+          "type": "integer",
+          "name": "CpuQuota",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "CPU Period",
+          "description": "Specifies the duration of each CPU scheduling period in microseconds.",
+          "tooltip": "Enter the CPU scheduling period in microseconds.",
+          "type": "integer",
+          "name": "CpuPeriod",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Additional Fields",
+          "description": "Specifies additional container configuration fields in JSON format that are not available through the other parameters.",
+          "tooltip": "Specify additional container configuration fields in JSON format that are not available through the other parameters.",
+          "name": "additional_fields",
+          "type": "json",
+          "required": false,
+          "editable": true,
+          "visible": true
+        }
+      ],
+      "output_schema": {
+        "Warnings": ""
+      }
+    },
+    {
+      "operation": "copy_to_container",
+      "title": "Copy To Container",
+      "description": "Copies a tar archive to a specified directory in a Docker container and extracts its contents there.",
+      "category": "investigation",
+      "annotation": "copy_to_container",
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "input",
+          "title": "Type",
+          "type": "select",
+          "options": [
+            "Attachment ID",
+            "File IRI"
+          ],
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "description": "Specifies the type of file reference used to provide the archive to Docker.",
+          "tooltip": "Select whether the archive is provided using an Attachment ID or a File IRI."
+        },
+        {
+          "name": "value",
+          "title": "Reference ID",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "description": "Specifies the reference used to access the archive file. For playbook executions, this defaults to the {{vars.attachment_id}} or {{vars.file_iri}} value based on the selected Type.",
+          "tooltip": "Enter the Attachment ID or File IRI that references the archive file to copy to the container."
+        },
+        {
+          "title": "Container ID or Name",
+          "description": "Specifies the ID or name of the Docker container to which the archive is copied.",
+          "tooltip": "Enter the ID or name of the Docker container where you want to copy the archive.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Path in Container",
+          "description": "Specifies the path to the directory in the container where the archive contents are extracted.",
+          "tooltip": "Enter the directory path in the container where the archive contents should be extracted.",
+          "type": "text",
+          "name": "path",
+          "required": true,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": {
+        "result": ""
+      }
+    },
+    {
+      "operation": "remove_container",
+      "title": "Remove Container",
+      "description": "Removes a Docker container and optionally removes its associated anonymous volumes or link.",
+      "category": "investigation",
+      "annotation": "remove_container",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Container ID or Name",
+          "description": "Specifies the ID or name of the Docker container to remove.",
+          "tooltip": "Enter the ID or name of the Docker container you want to remove.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Force",
+          "description": "Specifies whether to forcefully remove the container. If enabled, a running container is stopped before it is removed.",
+          "tooltip": "Enable to forcefully remove the container, including stopping it if it is currently running.",
+          "type": "checkbox",
+          "name": "force",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Volumes",
+          "description": "Specifies whether to remove anonymous volumes associated with the container.",
+          "tooltip": "Enable to remove anonymous volumes associated with the container.",
+          "type": "checkbox",
+          "name": "v",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Link",
+          "description": "Specifies whether to remove the specified link associated with the container.",
+          "tooltip": "Enable to remove the specified link associated with the container.",
+          "type": "checkbox",
+          "name": "link",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        }
+      ],
+      "output_schema": {
+        "result": ""
+      }
+    },
+    {
+      "operation": "prune_containers",
+      "title": "Prune Containers",
+      "description": "Removes unused Docker containers based on the specified filters.",
+      "category": "investigation",
+      "annotation": "prune_containers",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Filters",
+          "description": "Specifies filters in JSON format to determine which unused containers should be removed.",
+          "tooltip": "Enter JSON-formatted filters to limit which unused containers are removed. Leave this blank to remove all eligible unused containers.",
+          "type": "json",
+          "name": "filters",
+          "required": false,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": {
+        "SpaceReclaimed": "",
+        "ContainersDeleted": []
+      }
+    },
+    {
+      "operation": "start_container",
+      "title": "Start Container",
+      "description": "Starts a stopped Docker container.",
+      "category": "investigation",
+      "annotation": "start_container",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Container ID or Name",
+          "description": "Specifies the ID or name of the Docker container to start.",
+          "tooltip": "Enter the ID or name of the Docker container you want to start.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Detach Keys",
+          "description": "Specifies the key sequence used to detach from the container when an interactive session is attached.",
+          "tooltip": "Enter a custom key sequence to detach from an interactive container session. Leave this blank to use the default sequence.",
+          "type": "text",
+          "name": "detachKeys",
+          "required": false,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": {
+        "result": ""
+      }
+    },
+    {
+      "operation": "stop_container",
+      "title": "Stop Container",
+      "description": "Stops a running Docker container gracefully, with an optional timeout before it is forcibly terminated.",
+      "category": "investigation",
+      "annotation": "stop_container",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Container ID or Name",
+          "description": "Specifies the ID or name of the Docker container to stop.",
+          "tooltip": "Enter the ID or name of the Docker container you want to stop.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Signal",
+          "description": "Specifies the signal to send to the container when stopping it. The signal can be provided as an integer or a signal name, such as SIGINT.",
+          "tooltip": "Enter the signal to send to the container, such as SIGINT. Leave this blank to use the default signal.",
+          "type": "text",
+          "name": "signal",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Timeout (seconds)",
+          "description": "Specifies the number of seconds to wait for the container to stop gracefully before it is forcibly terminated.",
+          "tooltip": "Enter the number of seconds to wait for the container to stop gracefully before it is forcibly terminated.",
+          "type": "integer",
+          "name": "t",
+          "required": false,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": {
+        "result": ""
+      }
+    },
+    {
+      "operation": "restart_container",
+      "title": "Restart Container",
+      "description": "Restarts a Docker container, with an optional timeout for gracefully stopping it before it is forcibly terminated.",
+      "category": "investigation",
+      "annotation": "restart_container",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Container ID or Name",
+          "description": "Specifies the ID or name of the Docker container to restart.",
+          "tooltip": "Enter the ID or name of the Docker container you want to restart.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Signal",
+          "description": "Specifies the signal to send to the container when stopping it as part of the restart operation. The signal can be provided as an integer or a signal name, such as SIGINT.",
+          "tooltip": "Enter the signal to send to the container when stopping it during the restart. Leave this blank to use the default signal.",
+          "type": "text",
+          "name": "signal",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Timeout",
+          "description": "Specifies the number of seconds to wait for the container to stop gracefully before it is forcibly terminated and restarted.",
+          "tooltip": "Enter the number of seconds to wait for the container to stop gracefully before it is forcibly terminated and restarted.",
+          "type": "integer",
+          "name": "t",
+          "required": false,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": {
+        "result": ""
+      }
+    },
+    {
+      "operation": "kill_container",
+      "title": "Kill Container",
+      "description": "Forcefully stops a Docker container by sending the specified signal.",
+      "category": "investigation",
+      "annotation": "kill_container",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Container ID or Name",
+          "description": "Specifies the ID or name of the Docker container to stop.",
+          "tooltip": "Enter the ID or name of the Docker container you want to stop.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Signal",
+          "description": "Specifies the signal to send to the container. The signal can be provided as an integer or a signal name, such as SIGINT. Defaults to SIGKILL.",
+          "tooltip": "Enter the signal to send to the container, such as SIGKILL or SIGINT. Defaults to SIGKILL.",
+          "type": "text",
+          "name": "signal",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": "SIGKILL"
+        }
+      ],
+      "output_schema": {
+        "result": ""
+      }
+    },
+    {
+      "operation": "pause_container",
+      "title": "Pause Container",
+      "description": "Pauses all processes running inside a Docker container.",
+      "category": "investigation",
+      "annotation": "pause_container",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Container ID or Name",
+          "description": "Specifies the ID or name of the Docker container to pause.",
+          "tooltip": "Enter the ID or name of the Docker container you want to pause.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": {
+        "result": ""
+      }
+    },
+    {
+      "operation": "unpause_container",
+      "title": "Unpause Container",
+      "description": "Resumes all processes in a paused Docker container.",
+      "category": "investigation",
+      "annotation": "unpause_container",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Container ID or Name",
+          "description": "Specifies the ID or name of the Docker container to resume.",
+          "tooltip": "Enter the ID or name of the paused Docker container you want to resume.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": {
+        "result": ""
+      }
+    },
+    {
+      "operation": "exec_container",
+      "title": "Exec in Container",
+      "description": "Runs a command inside a running Docker container with the specified execution and input/output settings.",
+      "category": "investigation",
+      "annotation": "exec_container",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Container ID or Name",
+          "description": "Specifies the ID or name of the running Docker container in which the command should be executed.",
+          "tooltip": "Enter the ID or name of the running Docker container where you want to execute the command.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Command",
+          "description": "Specifies the command to execute inside the container. The command can be provided as a string or as an array of command arguments.",
+          "tooltip": "Enter the command to execute inside the container.",
+          "type": "text",
+          "name": "Cmd",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "User",
+          "description": "Specifies the user and, optionally, the group under which the command should run inside the container. Supported formats include user, user:group, uid, and uid:gid.",
+          "tooltip": "Enter the user or user and group for running the command, such as root or 1000:1000.",
+          "type": "text",
+          "name": "User",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Working Directory",
+          "description": "Specifies the working directory in the container for the command execution.",
+          "tooltip": "Enter the working directory in the container where the command should be executed.",
+          "type": "text",
+          "name": "WorkingDir",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Privileged",
+          "description": "Specifies whether to run the command with extended privileges inside the container.",
+          "tooltip": "Enable to run the command with extended privileges inside the container.",
+          "type": "checkbox",
+          "name": "Privileged",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Attach Standard Input",
+          "description": "Specifies whether to attach the command's standard input stream.",
+          "tooltip": "Enable to attach standard input to the command.",
+          "type": "checkbox",
+          "name": "AttachStdin",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Attach Standard Output",
+          "description": "Specifies whether to attach the command's standard output stream.",
+          "tooltip": "Enable to attach standard output and receive the command's output.",
+          "type": "checkbox",
+          "name": "AttachStdout",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Attach Standard Error",
+          "description": "Specifies whether to attach the command's standard error stream.",
+          "tooltip": "Enable to attach standard error and receive error output from the command.",
+          "type": "checkbox",
+          "name": "AttachStderr",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Detach",
+          "description": "Specifies whether to detach from the command after it starts running.",
+          "tooltip": "Enable to detach from the command and allow it to continue running independently.",
+          "type": "checkbox",
+          "name": "Detach",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Tty",
+          "description": "Specifies whether to allocate a pseudo-terminal (TTY) for the command.",
+          "tooltip": "Enable to allocate a pseudo-terminal for the command. This is useful for interactive commands.",
+          "type": "checkbox",
+          "name": "Tty",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": true
+        },
+        {
+          "title": "Additional Fields",
+          "description": "Specifies additional execution configuration fields in JSON format that are not available through the other parameters.",
+          "tooltip": "Specify additional execution configuration fields in JSON format that are not available through the other parameters.",
+          "name": "additional_fields",
+          "type": "json",
+          "required": false,
+          "editable": true,
+          "visible": true
+        }
+      ],
+      "output_schema": {
+        "output": {
+          "result": ""
+        },
+        "exec_id": ""
+      }
+    },
+    {
+      "operation": "attach_container",
+      "title": "Attach Container",
+      "description": "Attaches to a Docker container to read its output or provide input through the selected streams.",
+      "category": "investigation",
+      "annotation": "attach_container",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Container ID or Name",
+          "description": "Specifies the ID or name of the Docker container to attach to.",
+          "tooltip": "Enter the ID or name of the Docker container you want to attach to.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Stdin",
+          "description": "Specifies whether to attach to the container's standard input stream.",
+          "tooltip": "Enable to send input to the container through the standard input stream.",
+          "type": "checkbox",
+          "name": "stdin",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Stdout",
+          "description": "Specifies whether to attach to the container's standard output stream.",
+          "tooltip": "Enable to receive output from the container's standard output stream.",
+          "type": "checkbox",
+          "name": "stdout",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Stderr",
+          "description": "Specifies whether to attach to the container's standard error stream.",
+          "tooltip": "Enable to receive error output from the container's standard error stream.",
+          "type": "checkbox",
+          "name": "stderr",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Stream",
+          "description": "Specifies whether to continuously stream output generated by the attached container after the action starts.",
+          "tooltip": "Enable to continuously receive new output from the container as it is generated.",
+          "type": "checkbox",
+          "name": "stream",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Logs",
+          "description": "Specifies whether to replay previously generated container logs before receiving new output. When Stream is enabled, the action continues streaming current output after the previous logs are returned.",
+          "tooltip": "Enable to retrieve previous container logs before streaming current output.",
+          "type": "checkbox",
+          "name": "logs",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Detach Keys",
+          "description": "Specifies a custom key sequence used to detach from the container session.",
+          "tooltip": "Enter a custom key sequence to detach from the container session. Leave this blank to use the default sequence.",
+          "type": "text",
+          "name": "detachKeys",
+          "required": false,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": {
+        "result": ""
+      }
+    },
+    {
+      "operation": "resize_container",
+      "title": "Resize Container TTY",
+      "description": "Resizes the TTY session of a Docker container to the specified height and width.",
+      "category": "investigation",
+      "annotation": "resize_container",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Container ID or Name",
+          "description": "Specifies the ID or name of the Docker container whose TTY session should be resized.",
+          "tooltip": "Enter the ID or name of the Docker container whose TTY session you want to resize.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Height",
+          "description": "Specifies the height of the TTY session in characters.",
+          "tooltip": "Enter the height of the TTY session in characters.",
+          "type": "integer",
+          "name": "h",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Width",
+          "description": "Specifies the width of the TTY session in characters.",
+          "tooltip": "Enter the width of the TTY session in characters.",
+          "type": "integer",
+          "name": "w",
+          "required": true,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": {
+        "result": ""
+      }
+    },
+    {
+      "operation": "copy_from_container",
+      "title": "Copy From Container",
+      "description": "Copies a file or directory from a Docker container and stores it as a tar archive.",
+      "category": "investigation",
+      "annotation": "copy_from_container",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Container ID or Name",
+          "description": "Specifies the ID or name of the Docker container from which the resource should be copied.",
+          "tooltip": "Enter the ID or name of the Docker container from which you want to copy a file or directory.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Path",
+          "description": "Specifies the path to the file or directory in the container's filesystem to copy.",
+          "tooltip": "Enter the path to the file or directory in the container that you want to copy.",
+          "type": "text",
+          "name": "path",
+          "required": true,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "@id": "",
+        "file": {
+          "id": "",
+          "@id": "",
+          "size": "",
+          "uuid": "",
+          "@type": "",
+          "assignee": "",
+          "filename": "",
+          "metadata": [],
+          "mimeType": "",
+          "thumbnail": "",
+          "uploadDate": ""
+        },
+        "name": "",
+        "type": "",
+        "uuid": "",
+        "@type": "",
+        "tasks": [],
+        "alerts": [],
+        "assets": [],
+        "owners": [
+          ""
+        ],
+        "people": [],
+        "@context": "",
+        "assignee": "",
+        "comments": [],
+        "warrooms": [],
+        "incidents": [],
+        "createDate": "",
+        "createUser": {
+          "id": "",
+          "@id": "",
+          "name": "",
+          "uuid": "",
+          "@type": "",
+          "avatar": "",
+          "userId": "",
+          "userType": "",
+          "createDate": "",
+          "createUser": "",
+          "modifyDate": "",
+          "modifyUser": ""
+        },
+        "indicators": [],
+        "modifyDate": "",
+        "modifyUser": {
+          "id": "",
+          "@id": "",
+          "name": "",
+          "uuid": "",
+          "@type": "",
+          "avatar": "",
+          "userId": "",
+          "userType": "",
+          "createDate": "",
+          "createUser": "",
+          "modifyDate": "",
+          "modifyUser": ""
+        },
+        "recordTags": [],
+        "userOwners": [],
+        "description": ""
+      }
+    },
+    {
+      "operation": "container_export",
+      "title": "Export Container",
+      "description": "Exports the filesystem contents of a Docker container as a tar archive.",
+      "category": "investigation",
+      "annotation": "container_export",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Container ID or Name",
+          "description": "Specifies the ID or name of the Docker container to export.",
+          "tooltip": "Enter the ID or name of the Docker container whose filesystem contents you want to export.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "@id": "",
+        "file": {
+          "id": "",
+          "@id": "",
+          "size": "",
+          "uuid": "",
+          "@type": "",
+          "assignee": "",
+          "filename": "",
+          "metadata": [],
+          "mimeType": "",
+          "thumbnail": "",
+          "uploadDate": ""
+        },
+        "name": "",
+        "type": "",
+        "uuid": "",
+        "@type": "",
+        "tasks": [],
+        "alerts": [],
+        "assets": [],
+        "owners": [
+          ""
+        ],
+        "people": [],
+        "@context": "",
+        "assignee": "",
+        "comments": [],
+        "warrooms": [],
+        "incidents": [],
+        "createDate": "",
+        "createUser": {
+          "id": "",
+          "@id": "",
+          "name": "",
+          "uuid": "",
+          "@type": "",
+          "avatar": "",
+          "userId": "",
+          "userType": "",
+          "createDate": "",
+          "createUser": "",
+          "modifyDate": "",
+          "modifyUser": ""
+        },
+        "indicators": [],
+        "modifyDate": "",
+        "modifyUser": {
+          "id": "",
+          "@id": "",
+          "name": "",
+          "uuid": "",
+          "@type": "",
+          "avatar": "",
+          "userId": "",
+          "userType": "",
+          "createDate": "",
+          "modifyUser": ""
+        },
+        "recordTags": [],
+        "userOwners": [],
+        "description": ""
+      }
+    },
+    {
+      "operation": "container_commit",
+      "title": "Commit Container",
+      "description": "Creates a new Docker image from the current state of a container.",
+      "category": "investigation",
+      "annotation": "container_commit",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Container ID or Name",
+          "description": "Specifies the ID or name of the Docker container from which the image should be created.",
+          "tooltip": "Enter the ID or name of the Docker container you want to commit as an image.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Repository",
+          "description": "Specifies the repository name for the newly created Docker image.",
+          "tooltip": "Enter the repository name to assign to the created image.",
+          "type": "text",
+          "name": "repo",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Tag",
+          "description": "Specifies the tag to assign to the newly created Docker image. Defaults to latest.",
+          "tooltip": "Enter the tag for the created image. Defaults to latest.",
+          "type": "text",
+          "name": "tag",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": "latest"
+        },
+        {
+          "title": "Comment",
+          "description": "Specifies a descriptive comment or commit message for the created image.",
+          "tooltip": "Enter an optional comment describing the changes or purpose of the created image.",
+          "type": "text",
+          "name": "comment",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Author",
+          "description": "Specifies the author information to associate with the created image.",
+          "tooltip": "Enter the author information to associate with the created image.",
+          "type": "text",
+          "name": "author",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Changes",
+          "description": "Specifies Dockerfile instructions to apply to the container configuration when creating the image.",
+          "tooltip": "Enter Dockerfile instructions to apply when creating the image, such as CMD, ENTRYPOINT, ENV, or EXPOSE.",
+          "type": "text",
+          "name": "changes",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Pause",
+          "description": "Specifies whether to pause the container during the commit operation to prevent changes while the image is being created.",
+          "tooltip": "Enable to pause the container while creating the image. Defaults to enabled.",
+          "type": "checkbox",
+          "name": "pause",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": true
+        },
+        {
+          "title": "Additional Fields",
+          "name": "additional_fields",
+          "type": "json",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Specify additional image creation fields in JSON format that are not available through the other parameters.",
+          "description": "Specifies additional image creation fields in JSON format that are not available through the other parameters."
+        }
+      ],
+      "output_schema": {
+        "id": ""
+      }
+    },
+    {
+      "operation": "build_image",
+      "title": "Build Image",
+      "description": "Builds a Docker image from the specified Dockerfile content and build configuration.",
+      "category": "investigation",
+      "annotation": "build_image",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Docker File Content",
+          "description": "Specifies the contents of the Dockerfile used to build the image.",
+          "tooltip": "Enter the Dockerfile instructions used to build the Docker image.",
+          "type": "text",
+          "name": "dockerfile_content",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Tag",
+          "description": "Specifies the name and optional tag to assign to the built image in the name:tag format. If no tag is specified, latest is used.",
+          "tooltip": "Enter the image name and optional tag, such as my-image:1.0. The tag defaults to latest if omitted.",
+          "type": "text",
+          "name": "t",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "No Cache",
+          "description": "Specifies whether to disable the build cache and rebuild all applicable image layers.",
+          "tooltip": "Enable to build the image without using cached layers.",
+          "type": "checkbox",
+          "name": "nocache",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Pull Base Images",
+          "description": "Specifies whether to attempt to pull newer versions of the base images before building the image.",
+          "tooltip": "Enable to pull the latest available base images before the build, even if a local version exists.",
+          "type": "checkbox",
+          "name": "pull",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Build Args",
+          "description": "Specifies build-time variables as a JSON map of key-value pairs. These values can be used by Dockerfile instructions for variable expansion or during build commands.",
+          "tooltip": "Enter build-time variables in JSON format, such as {\"FOO\":\"bar\"}. Do not use this field to pass sensitive or secret values.",
+          "type": "json",
+          "name": "buildargs",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Labels",
+          "description": "Specifies custom metadata labels to apply to the built image as a JSON map of key-value pairs.",
+          "tooltip": "Enter image labels in JSON format, such as {\"environment\":\"production\"}.",
+          "type": "json",
+          "name": "labels",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Network Mode",
+          "description": "Specifies the network mode used by build commands that require network access, such as bridge, host, none, container:<name|id>, or a custom network name or ID.",
+          "tooltip": "Enter the network mode to use during the build, such as bridge, host, or none.",
+          "type": "text",
+          "name": "networkmode",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Platform",
+          "description": "Specifies the target platform for the image in the os[/arch[/variant]] format.",
+          "tooltip": "Enter the target platform, such as linux/amd64 or linux/arm64.",
+          "type": "text",
+          "name": "platform",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Additional Fields",
+          "name": "additional_fields",
+          "type": "json",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Specify additional image build fields in JSON format that are not available through the other parameters.",
+          "description": "Specifies additional image build fields in JSON format that are not available through the other parameters."
+        }
+      ],
+      "output_schema": {
+        "status_code": "",
+        "build_output": [
+          {
+            "stream": ""
+          }
+        ]
+      }
+    },
+    {
+      "operation": "pull_image",
+      "title": "Pull Image",
+      "description": "Pulls a Docker image from a registry or imports an image from the specified source.",
+      "category": "investigation",
+      "annotation": "pull_image",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Image",
+          "description": "Specifies the image name to pull. The image name can include an optional tag or digest to identify a specific image version.",
+          "type": "text",
+          "name": "fromImage",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "placeholder": "(e.g., library/nginx:latest)",
+          "tooltip": "Enter the image name to pull, with an optional tag or digest, such as library/nginx:latest."
+        },
+        {
+          "title": "From Source",
+          "description": "Specifies the source from which an image should be imported. The value can be a URL or - to read the image from the request body. This parameter is used only when importing an image.",
+          "type": "text",
+          "name": "fromSrc",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Enter the source URL for the image to import, or - to read the image from the request body."
+        },
+        {
+          "title": "Repository Name",
+          "description": "Specifies the repository name to assign to an imported image. The repository name can include a tag. This parameter is used only when importing an image.",
+          "type": "text",
+          "name": "repo",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Enter the repository name to assign to the imported image, optionally including a tag."
+        },
+        {
+          "title": "Tag",
+          "description": "Specifies the tag or digest of the image to pull. If no tag or digest is specified, all available tags for the specified image are pulled.",
+          "type": "text",
+          "name": "tag",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Enter the image tag or digest to pull. Leave this blank to pull all available tags."
+        },
+        {
+          "title": "Message",
+          "description": "Specifies the commit message to associate with an imported image.",
+          "type": "text",
+          "name": "message",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Enter an optional commit message for the imported image."
+        },
+        {
+          "title": "Additional Fields",
+          "name": "additional_fields",
+          "type": "json",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Specify additional image pull or import fields in JSON format that are not available through the other parameters.",
+          "description": "Specifies additional image pull or import fields in JSON format that are not available through the other parameters."
+        }
+      ],
+      "output_schema": [
+        {
+          "id": "",
+          "status": ""
+        }
+      ]
+    },
+    {
+      "operation": "list_images",
+      "title": "List Images",
+      "description": "Retrieves a list of Docker images available on the Docker host, including image IDs, tags, sizes, labels, digests, and other summary information.",
+      "category": "investigation",
+      "annotation": "list_images",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "All",
+          "description": "Specifies whether to include all images, including intermediate images that are not referenced by a child image. When disabled, only final-layer images are returned.",
+          "tooltip": "Enable to include all images, including intermediate images. By default, only final-layer images are returned.",
+          "type": "checkbox",
+          "name": "all",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Filters",
+          "description": "Specifies filters in JSON format to limit the images returned based on supported image attributes.",
+          "tooltip": "Enter JSON-formatted filters to return only images matching the specified criteria.",
+          "type": "json",
+          "name": "filters",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Shared Size",
+          "description": "Specifies whether to calculate and include the amount of storage shared with other images for each returned image.",
+          "tooltip": "Enable to include the shared storage size for each image.",
+          "type": "checkbox",
+          "name": "shared_size",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Digests",
+          "description": "Specifies whether to include repository digest information for each returned image.",
+          "tooltip": "Enable to include repository digest information for each image.",
+          "type": "checkbox",
+          "name": "digests",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Manifests",
+          "description": "Specifies whether to include manifest information in the image summary.",
+          "tooltip": "Enable to include manifest information for each image.",
+          "type": "checkbox",
+          "name": "manifests",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Identity",
+          "description": "Specifies whether to include identity information in each manifest summary. This option requires Manifests to be enabled.",
+          "tooltip": "Enable to include identity information in manifest summaries. Enable Manifests to use this option.",
+          "type": "checkbox",
+          "name": "identity",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        }
+      ],
+      "output_schema": [
+        {
+          "Id": "",
+          "Size": "",
+          "Labels": {
+            "git_commit": "",
+            "io.portainer.server": "",
+            "org.opencontainers.image.url": "",
+            "org.opencontainers.image.title": "",
+            "org.opencontainers.image.vendor": "",
+            "com.docker.extension.screenshots": "",
+            "org.opencontainers.image.created": "",
+            "com.docker.desktop.extension.icon": "",
+            "org.opencontainers.image.revision": "",
+            "com.docker.extension.publisher-url": "",
+            "com.docker.extension.additional-urls": "",
+            "org.opencontainers.image.description": "",
+            "org.opencontainers.image.documentation": "",
+            "com.docker.desktop.extension.api.version": "",
+            "com.docker.extension.detailed-description": ""
+          },
+          "Created": "",
+          "ParentId": "",
+          "RepoTags": [],
+          "Manifests": [],
+          "Containers": "",
+          "Descriptor": {
+            "size": "",
+            "digest": "",
+            "mediaType": ""
+          },
+          "SharedSize": "",
+          "RepoDigests": []
+        }
+      ]
+    },
+    {
+      "operation": "search_images",
+      "title": "Search Images",
+      "description": "Searches Docker Hub for images matching the specified search term and returns image details such as name, description, popularity, and official or automated status.",
+      "category": "investigation",
+      "annotation": "search_images",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Search Term",
+          "description": "Specifies the term used to search for images on Docker Hub.",
+          "tooltip": "Enter the image name or search term to find matching images on Docker Hub.",
+          "type": "text",
+          "name": "term",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Limit",
+          "description": "Specifies the maximum number of image search results to return.",
+          "tooltip": "Enter the maximum number of images to return. Defaults to 25.",
+          "type": "integer",
+          "name": "limit",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": 25
+        },
+        {
+          "title": "Filters",
+          "description": "Specifies filters in JSON format to limit the image search results based on supported image attributes.",
+          "tooltip": "Enter JSON-formatted filters to return only images matching the specified criteria.",
+          "type": "json",
+          "name": "filters",
+          "required": false,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": [
+        {
+          "name": "",
+          "star_count": "",
+          "description": "",
+          "is_official": "",
+          "is_automated": ""
+        }
+      ]
+    },
+    {
+      "operation": "inspect_image",
+      "title": "Inspect Image",
+      "description": "Retrieves detailed, low-level information about a Docker image, including its configuration, metadata, filesystem layers, platform, tags, and digests.",
+      "category": "investigation",
+      "annotation": "inspect_image",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Image Name or ID",
+          "description": "Specifies the name or ID of the Docker image to inspect.",
+          "tooltip": "Enter the name or ID of the Docker image you want to inspect.",
+          "type": "text",
+          "name": "name",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Manifests",
+          "description": "Specifies whether to include manifest information in the image inspection results.",
+          "tooltip": "Enable to include manifest details for the inspected image.",
+          "type": "checkbox",
+          "name": "manifests",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        }
+      ],
+      "output_schema": {
+        "Id": "",
+        "Os": "",
+        "Size": "",
+        "Config": {
+          "Env": [],
+          "Labels": {
+            "git_commit": "",
+            "io.portainer.server": "",
+            "org.opencontainers.image.url": "",
+            "org.opencontainers.image.title": "",
+            "org.opencontainers.image.vendor": "",
+            "com.docker.extension.screenshots": "",
+            "org.opencontainers.image.created": "",
+            "com.docker.desktop.extension.icon": "",
+            "org.opencontainers.image.revision": "",
+            "com.docker.extension.publisher-url": "",
+            "com.docker.extension.additional-urls": "",
+            "org.opencontainers.image.description": "",
+            "org.opencontainers.image.documentation": "",
+            "com.docker.desktop.extension.api.version": "",
+            "com.docker.extension.detailed-description": ""
+          },
+          "Volumes": {},
+          "Entrypoint": [],
+          "WorkingDir": "",
+          "ExposedPorts": {}
+        },
+        "Parent": "",
+        "RootFS": {
+          "Type": "",
+          "Layers": []
+        },
+        "Comment": "",
+        "Created": "",
+        "Metadata": {
+          "LastTagTime": ""
+        },
+        "RepoTags": [],
+        "Manifests": [
+          {
+            "ID": "",
+            "Kind": "",
+            "Size": {
+              "Total": "",
+              "Content": ""
+            },
+            "Available": "",
+            "ImageData": {
+              "Size": {
+                "Unpacked": ""
+              },
+              "Platform": {
+                "os": "",
+                "architecture": ""
+              },
+              "Containers": []
+            },
+            "Descriptor": {
+              "size": "",
+              "digest": "",
+              "mediaType": ""
+            }
+          }
+        ],
+        "Descriptor": {
+          "size": "",
+          "digest": "",
+          "mediaType": ""
+        },
+        "RepoDigests": [],
+        "Architecture": ""
+      }
+    },
+    {
+      "operation": "image_history",
+      "title": "Image History",
+      "description": "Retrieves the layer history of a Docker image, including layer IDs, sizes, tags, creation details, and commands used to create each layer.",
+      "category": "investigation",
+      "annotation": "image_history",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Image Name or ID",
+          "description": "Specifies the name or ID of the Docker image for which the layer history should be retrieved.",
+          "tooltip": "Enter the name or ID of the Docker image whose layer history you want to view.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Platform",
+          "description": "Specifies the OCI platform variant to use when retrieving the image history in JSON format. If omitted, Docker selects an available platform, prioritizing the host platform.",
+          "tooltip": "Enter the OCI platform in JSON format, such as {\"os\":\"linux\",\"architecture\":\"arm\",\"variant\":\"v5\"}. Leave blank to use the default available platform.",
+          "type": "json",
+          "name": "platform",
+          "required": false,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": [
+        {
+          "Id": "",
+          "Size": "",
+          "Tags": [],
+          "Comment": "",
+          "Created": "",
+          "CreatedBy": ""
+        }
+      ]
+    },
+    {
+      "operation": "tag_image",
+      "title": "Tag Image",
+      "description": "Creates an additional tag reference for a Docker image, optionally using a different repository name and tag.",
+      "category": "investigation",
+      "annotation": "tag_image",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Image Name or ID",
+          "description": "Specifies the name or ID of the Docker image to tag.",
+          "tooltip": "Enter the name or ID of the Docker image you want to tag.",
+          "type": "text",
+          "name": "name",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Repository",
+          "description": "Specifies the repository name for the new image tag, such as someuser/someimage.",
+          "tooltip": "Enter the repository name to associate with the new tag, such as someuser/someimage.",
+          "type": "text",
+          "name": "repo",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Tag",
+          "description": "Specifies the tag name to assign to the image in the specified repository.",
+          "tooltip": "Enter the tag name to assign to the image, such as latest or v1.0.",
+          "type": "text",
+          "name": "tag",
+          "required": false,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": {
+        "result": ""
+      }
+    },
+    {
+      "operation": "push_image",
+      "title": "Push Image",
+      "description": "Pushes a Docker image from the local image store to a container registry.",
+      "category": "investigation",
+      "annotation": "push_image",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Image Name",
+          "description": "Specifies the name of the Docker image to push. The image must exist in the local image store with the specified name.",
+          "type": "text",
+          "name": "name",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Enter the image name without a tag, such as registry.example.com/myimage. If a tag is included, it is ignored and should instead be provided in the Tag field."
+        },
+        {
+          "title": "Tag",
+          "description": "Specifies the tag of the image to push. If no tag is provided, all tags of the specified image available in the local image store are pushed.",
+          "type": "text",
+          "name": "tag",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Enter the image tag to push, such as latest. Leave blank to push all available tags for the specified image."
+        },
+        {
+          "title": "Platform",
+          "description": "Specifies the OCI platform variant to push in JSON format. If omitted, all available platform variants are attempted.",
+          "type": "json",
+          "name": "platform",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "tooltip": "Enter the OCI platform in JSON format, such as {\"os\":\"linux\",\"architecture\":\"arm\",\"variant\":\"v5\"}. Leave blank to attempt pushing all available platform variants."
+        }
+      ],
+      "output_schema": {}
+    },
+    {
+      "operation": "remove_image",
+      "title": "Remove Image",
+      "description": "Removes a Docker image from the local image store and optionally removes its untagged parent images.",
+      "category": "investigation",
+      "annotation": "remove_image",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Image Name or ID",
+          "description": "Specifies the name or ID of the Docker image to remove.",
+          "tooltip": "Enter the name or ID of the Docker image you want to remove.",
+          "type": "text",
+          "name": "name",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Force",
+          "description": "Specifies whether to force removal of the image, including when it is referenced by stopped containers or has multiple tags.",
+          "tooltip": "Enable to forcefully remove the image even if it is referenced by stopped containers or has other tags.",
+          "type": "checkbox",
+          "name": "force",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "No Prune",
+          "description": "Specifies whether to preserve untagged parent images that would otherwise be removed as part of the image removal.",
+          "tooltip": "Enable to keep untagged parent images instead of removing them.",
+          "type": "checkbox",
+          "name": "noprune",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        }
+      ],
+      "output_schema": [
+        {
+          "Untagged": ""
+        },
+        {
+          "Deleted": ""
+        }
+      ]
+    },
+    {
+      "operation": "prune_images",
+      "title": "Prune Images",
+      "description": "Removes unused Docker images from the local image store based on the specified filters.",
+      "category": "investigation",
+      "annotation": "prune_images",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Filters",
+          "description": "Specifies filters in JSON format to determine which unused images should be removed.",
+          "tooltip": "Enter JSON-formatted filters to limit which unused images are removed. Leave this blank to remove all eligible unused images.",
+          "type": "json",
+          "name": "filters",
+          "required": false,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": {
+        "ImagesDeleted": [
+          {
+            "Untagged": ""
+          },
+          {
+            "Deleted": ""
+          }
+        ],
+        "SpaceReclaimed": ""
+      }
+    },
+    {
+      "operation": "create_network",
+      "title": "Create Network",
+      "description": "Creates a Docker network with the specified driver, scope, connectivity, and IP configuration.",
+      "category": "investigation",
+      "annotation": "create_network",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Name",
+          "description": "Specifies the name of the Docker network to create.",
+          "tooltip": "Enter the name to assign to the new Docker network.",
+          "type": "text",
+          "name": "Name",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Driver",
+          "description": "Specifies the network driver to use for the new Docker network. Defaults to bridge.",
+          "tooltip": "Enter the network driver to use, such as bridge, host, or overlay. Defaults to bridge.",
+          "type": "text",
+          "name": "Driver",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": "bridge"
+        },
+        {
+          "title": "Scope",
+          "description": "Specifies the scope of the network, such as local for a single Docker host or swarm for a cluster-wide network.",
+          "tooltip": "Enter the network scope, such as local or swarm.",
+          "type": "text",
+          "name": "Scope",
+          "required": false,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Internal",
+          "description": "Specifies whether to restrict the network from accessing external networks.",
+          "tooltip": "Enable to restrict external connectivity for containers connected to this network.",
+          "type": "checkbox",
+          "name": "Internal",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Attachable",
+          "description": "Specifies whether manually created containers can connect to a swarm-scoped network.",
+          "tooltip": "Enable to allow regular containers to manually attach to a swarm-scoped network.",
+          "type": "checkbox",
+          "name": "Attachable",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Ingress",
+          "description": "Specifies whether the network is used as the ingress network for routing traffic in Docker Swarm mode.",
+          "tooltip": "Enable to create the network as an ingress network for Docker Swarm routing.",
+          "type": "checkbox",
+          "name": "Ingress",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Enable IPv4",
+          "description": "Specifies whether IPv4 networking is enabled on the Docker network.",
+          "tooltip": "Enable to allow IPv4 networking on the new Docker network.",
+          "type": "checkbox",
+          "name": "EnableIPv4",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": true
+        },
+        {
+          "title": "Enable IPv6",
+          "description": "Specifies whether IPv6 networking is enabled on the Docker network.",
+          "tooltip": "Enable to allow IPv6 networking on the new Docker network.",
+          "type": "checkbox",
+          "name": "EnableIPv6",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Additional Fields",
+          "name": "additional_fields",
+          "type": "json",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Specify additional network configuration fields in JSON format that are not available through the other parameters.",
+          "description": "Specifies additional network configuration fields in JSON format that are not available through the other parameters."
+        }
+      ],
+      "output_schema": {
+        "Id": "",
+        "Warning": ""
+      }
+    },
+    {
+      "operation": "list_networks",
+      "title": "List Networks",
+      "description": "Retrieves a list of Docker networks and their configuration, including drivers, scopes, IPAM settings, labels, and connectivity options.",
+      "category": "investigation",
+      "annotation": "list_networks",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Filters",
+          "description": "Specifies filters in JSON format to limit the networks returned based on supported network attributes.",
+          "tooltip": "Enter JSON-formatted filters to return only networks matching the specified criteria. Leave this blank to return all networks.",
+          "type": "json",
+          "name": "filters",
+          "required": false,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": [
+        {
+          "Id": "",
+          "IPAM": {
+            "Config": [
+              {
+                "Subnet": "",
+                "Gateway": ""
+              }
+            ],
+            "Driver": "",
+            "Options": ""
+          },
+          "Name": "",
+          "Scope": "",
+          "Driver": "",
+          "Labels": {},
+          "Created": "",
+          "Ingress": "",
+          "Options": {
+            "com.docker.network.driver.mtu": "",
+            "com.docker.network.bridge.name": "",
+            "com.docker.network.bridge.enable_icc": "",
+            "com.docker.network.bridge.default_bridge": "",
+            "com.docker.network.bridge.host_binding_ipv4": "",
+            "com.docker.network.bridge.enable_ip_masquerade": ""
+          },
+          "Internal": "",
+          "Attachable": "",
+          "ConfigFrom": {
+            "Network": ""
+          },
+          "ConfigOnly": "",
+          "EnableIPv4": "",
+          "EnableIPv6": ""
+        }
+      ]
+    },
+    {
+      "operation": "inspect_network",
+      "title": "Inspect Network",
+      "description": "Retrieves detailed information about a Docker network, including its configuration, IPAM settings, connected containers, and network options.",
+      "category": "investigation",
+      "annotation": "inspect_network",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Network ID or Name",
+          "description": "Specifies the ID or name of the Docker network to inspect.",
+          "tooltip": "Enter the ID or name of the Docker network you want to inspect.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Verbose",
+          "description": "Specifies whether to include additional network information for troubleshooting and diagnostic purposes.",
+          "tooltip": "Enable to include additional network details that can help with troubleshooting.",
+          "type": "checkbox",
+          "name": "verbose",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        },
+        {
+          "title": "Scope",
+          "description": "Specifies the network scope to use when inspecting the network, such as local, swarm, or global.",
+          "tooltip": "Enter the network scope to inspect, such as local, swarm, or global. Leave blank to use the default scope.",
+          "type": "text",
+          "name": "scope",
+          "required": false,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": {
+        "Id": "",
+        "IPAM": {
+          "Config": [
+            {
+              "Subnet": "",
+              "Gateway": ""
+            }
+          ],
+          "Driver": "",
+          "Options": {}
+        },
+        "Name": "",
+        "Scope": "",
+        "Driver": "",
+        "Labels": {},
+        "Status": {
+          "IPAM": {
+            "Subnets": {
+              "172.17.0.0/16": {
+                "IPsInUse": "",
+                "DynamicIPsAvailable": ""
+              }
+            }
+          }
+        },
+        "Created": "",
+        "Ingress": "",
+        "Options": {},
+        "Internal": "",
+        "Attachable": "",
+        "ConfigFrom": {
+          "Network": ""
+        },
+        "ConfigOnly": "",
+        "Containers": {
+          "17ccba90faf3f1ef5895e51cdd27ea78ad0215ce91177240217e254f2fbf6f1e": {
+            "Name": "",
+            "EndpointID": "",
+            "MacAddress": "",
+            "IPv4Address": "",
+            "IPv6Address": ""
+          }
+        },
+        "EnableIPv4": "",
+        "EnableIPv6": ""
+      }
+    },
+    {
+      "operation": "connect_network",
+      "title": "Connect Network",
+      "description": "Connects a Docker container to a network. The network must be local-scoped or a swarm-scoped network configured as attachable.",
+      "category": "investigation",
+      "annotation": "connect_network",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Network ID or Name",
+          "description": "Specifies the ID or name of the Docker network to connect to the container.",
+          "tooltip": "Enter the ID or name of the Docker network you want to connect to the container.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Container ID or Name",
+          "description": "Specifies the ID or name of the Docker container to connect to the network.",
+          "tooltip": "Enter the ID or name of the Docker container you want to connect to the network.",
+          "type": "text",
+          "name": "Container",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Additional Fields",
+          "name": "additional_fields",
+          "type": "json",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Specify additional network connection fields in JSON format that are not available through the other parameters.",
+          "description": "Specifies additional network connection fields in JSON format that are not available through the other parameters."
+        }
+      ],
+      "output_schema": {
+        "result": ""
+      }
+    },
+    {
+      "operation": "disconnect_network",
+      "title": "Disconnect Network",
+      "description": "Disconnects a Docker container from a network.",
+      "category": "investigation",
+      "annotation": "disconnect_network",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Network ID or Name",
+          "description": "Specifies the ID or name of the Docker network from which the container should be disconnected.",
+          "tooltip": "Enter the ID or name of the Docker network you want to disconnect the container from.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Container ID or Name",
+          "description": "Specifies the ID or name of the Docker container to disconnect from the network.",
+          "tooltip": "Enter the ID or name of the Docker container you want to disconnect from the network.",
+          "type": "text",
+          "name": "Container",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Force",
+          "description": "Specifies whether to force the container to disconnect from the network.",
+          "tooltip": "Enable to forcefully disconnect the container from the network.",
+          "type": "checkbox",
+          "name": "Force",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        }
+      ],
+      "output_schema": {
+        "result": ""
+      }
+    },
+    {
+      "operation": "remove_network",
+      "title": "Remove Network",
+      "description": "Removes a Docker network from the Docker host.",
+      "category": "investigation",
+      "annotation": "remove_network",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Network ID or Name",
+          "description": "Specifies the ID or name of the Docker network to remove.",
+          "tooltip": "Enter the ID or name of the Docker network you want to remove.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": {
+        "result": ""
+      }
+    },
+    {
+      "operation": "prune_networks",
+      "title": "Prune Networks",
+      "description": "Removes unused Docker networks from the Docker host based on the specified filters.",
+      "category": "investigation",
+      "annotation": "prune_networks",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Filters",
+          "description": "Specifies filters in JSON format to determine which unused Docker networks should be removed.",
+          "tooltip": "Enter JSON-formatted filters to limit which unused networks are removed. Leave this blank to remove all eligible unused networks.",
+          "type": "json",
+          "name": "filters",
+          "required": false,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": {
+        "NetworksDeleted": []
+      }
+    },
+    {
+      "operation": "create_volume",
+      "title": "Create Volume",
+      "description": "Creates a Docker volume using the specified name, driver, and configuration.",
+      "category": "investigation",
+      "annotation": "create_volume",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Name",
+          "description": "Specifies the name of the Docker volume to create. Docker generates a name when a name is not provided.",
+          "tooltip": "Enter the name for the new Docker volume.",
+          "type": "text",
+          "name": "Name",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Driver",
+          "description": "Specifies the volume driver to use for the new Docker volume. Defaults to local.",
+          "tooltip": "Enter the volume driver to use, such as local. Defaults to local.",
+          "type": "text",
+          "name": "Driver",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": "local"
+        },
+        {
+          "title": "Additional Fields",
+          "name": "additional_fields",
+          "type": "json",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Specify additional volume configuration fields in JSON format that are not available through the other parameters.",
+          "description": "Specifies additional volume configuration fields in JSON format that are not available through the other parameters."
+        }
+      ],
+      "output_schema": {
+        "Name": "",
+        "Scope": "",
+        "Driver": "",
+        "Labels": {},
+        "Options": {},
+        "CreatedAt": "",
+        "Mountpoint": ""
+      }
+    },
+    {
+      "operation": "list_volumes",
+      "title": "List Volumes",
+      "description": "Retrieves a list of Docker volumes and their configuration, including names, drivers, scopes, labels, options, and mount points.",
+      "category": "investigation",
+      "annotation": "list_volumes",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Filters",
+          "description": "Specifies filters in JSON format to limit the Docker volumes returned based on supported volume attributes.",
+          "tooltip": "Enter JSON-formatted filters to return only volumes matching the specified criteria. Leave this blank to return all volumes.",
+          "type": "json",
+          "name": "filters",
+          "required": false,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": {
+        "Volumes": [
+          {
+            "Name": "",
+            "Scope": "",
+            "Driver": "",
+            "Labels": {
+              "com.docker.volume.anonymous": ""
+            },
+            "Options": {},
+            "CreatedAt": "",
+            "Mountpoint": ""
+          }
+        ],
+        "Warnings": []
+      }
+    },
+    {
+      "operation": "inspect_volume",
+      "title": "Inspect Volume",
+      "description": "Inspect a volume",
+      "category": "investigation",
+      "annotation": "inspect_volume",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Volume Name",
+          "description": "Volume name or ID",
+          "type": "text",
+          "name": "name",
+          "required": true,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": {
+        "Name": "",
+        "Scope": "",
+        "Driver": "",
+        "Labels": {
+          "com.docker.volume.anonymous": ""
+        },
+        "Options": {},
+        "CreatedAt": "",
+        "Mountpoint": ""
+      }
+    },
+    {
+      "operation": "remove_volume",
+      "title": "Remove Volume",
+      "description": "Removes a Docker volume from the Docker host.",
+      "category": "investigation",
+      "annotation": "remove_volume",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Volume Name",
+          "description": "Specifies the name or identifier of the Docker volume to remove.",
+          "tooltip": "Enter the name or identifier of the Docker volume you want to remove.",
+          "type": "text",
+          "name": "name",
+          "required": true,
+          "visible": true,
+          "editable": true
+        },
+        {
+          "title": "Force",
+          "description": "Specifies whether to force the removal of the Docker volume.",
+          "tooltip": "Enable to forcefully remove the Docker volume.",
+          "type": "checkbox",
+          "name": "force",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false
+        }
+      ],
+      "output_schema": {
+        "result": ""
+      }
+    },
+    {
+      "operation": "prune_volumes",
+      "title": "Prune Volumes",
+      "description": "Removes unused Docker volumes from the Docker host based on the specified filters.",
+      "category": "investigation",
+      "annotation": "prune_volumes",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Filters",
+          "description": "Specifies filters in JSON format to determine which unused Docker volumes should be removed.",
+          "tooltip": "Enter JSON-formatted filters to limit which unused volumes are removed. Leave this blank to remove all eligible unused volumes.",
+          "type": "json",
+          "name": "filters",
+          "required": false,
+          "visible": true,
+          "editable": true
+        }
+      ],
+      "output_schema": {
+        "SpaceReclaimed": "",
+        "VolumesDeleted": []
+      }
+    }
+  ]
+}
